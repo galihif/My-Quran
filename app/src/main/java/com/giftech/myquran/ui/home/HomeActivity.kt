@@ -1,6 +1,8 @@
 package com.giftech.myquran.ui.home
 
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,8 +22,13 @@ class HomeActivity : AppCompatActivity() {
         val viewmodel = ViewModelProvider(this,factory)[HomeViewModel::class.java]
         val adapter = SurahAdapter()
 
+        binding.rvSurah.visibility = View.GONE
+        binding.loading.visibility = View.VISIBLE
         viewmodel.getAllSurah().observe(this, {list ->
             adapter.setList(list)
+            binding.loading.visibility = View.GONE
+            binding.rvSurah.visibility = View.VISIBLE
+            Toast.makeText(this, list.size.toString(), Toast.LENGTH_LONG).show()
         })
 
         with(binding.rvSurah){

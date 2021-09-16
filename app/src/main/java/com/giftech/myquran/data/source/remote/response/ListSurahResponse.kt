@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class ListSurahResponse(
 
-	@field:SerializedName("ListSurahResponse")
+	@field:SerializedName("data")
 	val listSurahResponseItem: List<ListSurahResponseItem>
 )
 
