@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">My Quran</string>
+    <string name="title">My Quran</string>
+    <string name="desc">Learn Quran and\n Recite once everyday</string>
 </resources>
