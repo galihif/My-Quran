@@ -4,4 +4,8 @@
     <string name="desc">Learn Quran and\n Recite once everyday</string>
     <string name="get_started">Get Started</string>
     <string name="quran_image">Quran Image</string>
+    <string name="search">Search</string>
+    <string name="salam">Assalamualaikum</string>
+    <string name="last_read">Last Read</string>
+    <string name="surah">Surah</string>
 </resources>
