@@ -49,6 +49,7 @@
             android:layout_height="wrap_content"
             tools:text="MEKKAH - 7 AYAT"
             android:textSize="12sp"
+            android:textAllCaps="true"
             android:fontFamily="@font/poppins_medium"
             android:textColor="@color/text_gray"/>
 
