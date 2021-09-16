@@ -3,4 +3,5 @@
     <string name="title">My Quran</string>
     <string name="desc">Learn Quran and\n Recite once everyday</string>
     <string name="get_started">Get Started</string>
+    <string name="quran_image">Quran Image</string>
 </resources>
