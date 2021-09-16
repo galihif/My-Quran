@@ -20,7 +20,7 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             tools:text="1"
-            android:textColor="@color/black"
+            android:textColor="@color/text_purple"
             android:textSize="14sp"
             android:fontFamily="@font/poppins_medium"
             android:textAlignment="center"/>
