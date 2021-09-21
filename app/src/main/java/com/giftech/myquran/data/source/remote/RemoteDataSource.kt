@@ -2,8 +2,10 @@ package com.giftech.myquran.data.source.remote
 
 import android.util.Log
 import com.giftech.myquran.data.source.remote.api.ApiConfig
+import com.giftech.myquran.data.source.remote.response.AyatResponseItem
+import com.giftech.myquran.data.source.remote.response.ListAyatResponse
 import com.giftech.myquran.data.source.remote.response.ListSurahResponse
-import com.giftech.myquran.data.source.remote.response.ListSurahResponseItem
+import com.giftech.myquran.data.source.remote.response.SurahResponseItem
 import retrofit2.Call
 import retrofit2.Response
 
@@ -38,8 +40,31 @@ class RemoteDataSource {
         })
     }
 
+    fun getAyatByNomorSurah(nomorSurah:Int, callback: loadAllAyatCallback){
+        val client = ApiConfig.getApiService().getAyatByNomorSurah(nomorSurah)
+        client.enqueue(object : retrofit2.Callback<ListAyatResponse>{
+            override fun onResponse(
+                call: Call<ListAyatResponse>,
+                response: Response<ListAyatResponse>
+            ) {
+                if(response.isSuccessful){
+                    val listAyatResponseItem = response.body()?.listAyatResponseItem
+                    callback.onResponseReceived(listAyatResponseItem!!)
+                }
+            }
+
+            override fun onFailure(call: Call<ListAyatResponse>, t: Throwable) {
+                Log.e("TAG", "onFailure: ${t.message.toString()}")
+            }
+
+        })
+    }
+
     interface loadAllSurahCallback{
-        fun onResponseReceived(res:List<ListSurahResponseItem>)
+        fun onResponseReceived(res:List<SurahResponseItem>)
+    }
+    interface loadAllAyatCallback{
+        fun onResponseReceived(res:List<AyatResponseItem>)
     }
 
 }

@@ -2,9 +2,11 @@ package com.giftech.myquran.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.giftech.myquran.data.source.local.entity.AyatEntity
 import com.giftech.myquran.data.source.local.entity.SurahEntity
 import com.giftech.myquran.data.source.remote.RemoteDataSource
-import com.giftech.myquran.data.source.remote.response.ListSurahResponseItem
+import com.giftech.myquran.data.source.remote.response.AyatResponseItem
+import com.giftech.myquran.data.source.remote.response.SurahResponseItem
 
 class SurahRepository private constructor(
     private val remoteDataSource: RemoteDataSource
@@ -23,7 +25,7 @@ class SurahRepository private constructor(
         val listSurah = MutableLiveData<List<SurahEntity>>()
         val listSurahRes = ArrayList<SurahEntity>()
         remoteDataSource.getAllSurah(object : RemoteDataSource.loadAllSurahCallback{
-            override fun onResponseReceived(res: List<ListSurahResponseItem>) {
+            override fun onResponseReceived(res: List<SurahResponseItem>) {
                 res.forEach{
                     val surah = SurahEntity()
                     surah.nama = it.nama
@@ -39,6 +41,26 @@ class SurahRepository private constructor(
             }
         })
         return listSurah
+    }
+
+    override fun getAyatByNomorSurah(nomorSurah: Int): LiveData<List<AyatEntity>> {
+        val listAyat = MutableLiveData<List<AyatEntity>>()
+        val listAyatRes = ArrayList<AyatEntity>()
+        remoteDataSource.getAyatByNomorSurah(nomorSurah, object : RemoteDataSource.loadAllAyatCallback{
+            override fun onResponseReceived(res: List<AyatResponseItem>) {
+                res.forEach {
+                    val ayat = AyatEntity()
+                    ayat.id = it.id
+                    ayat.arab = it.ar
+                    ayat.nomor = it.nomor.toInt()
+                    ayat.nomorSurah = nomorSurah
+                    listAyatRes.add(ayat)
+                }
+                listAyat.postValue(listAyatRes)
+            }
+        })
+
+        return listAyat
     }
 
 }

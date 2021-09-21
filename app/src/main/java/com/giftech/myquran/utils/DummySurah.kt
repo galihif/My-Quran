@@ -1,14 +1,14 @@
 package com.giftech.myquran.utils
 
-import com.giftech.myquran.data.source.remote.response.ListSurahResponseItem
+import com.giftech.myquran.data.source.remote.response.SurahResponseItem
 
 object DummySurah {
 
-    fun generateRemoteDummyListSurah():List<ListSurahResponseItem>{
-        val listSurah = ArrayList<ListSurahResponseItem>()
+    fun generateRemoteDummyListSurah():List<SurahResponseItem>{
+        val listSurah = ArrayList<SurahResponseItem>()
 
         listSurah.add(
-            ListSurahResponseItem(
+            SurahResponseItem(
                 arti= "Pembukaan",
                 asma= "الفاتحة",
                 audio= "http://ia802609.us.archive.org/13/items/quraninindonesia/001AlFaatihah.mp3",
@@ -22,7 +22,7 @@ object DummySurah {
             )
         )
         listSurah.add(
-            ListSurahResponseItem(
+            SurahResponseItem(
                 arti= "Sapi Betina",
                 asma= "البقرة",
                 audio= "http://ia802609.us.archive.org/13/items/quraninindonesia/002AlBaqarah.mp3",

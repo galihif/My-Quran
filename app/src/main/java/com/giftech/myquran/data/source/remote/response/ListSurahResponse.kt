@@ -5,10 +5,10 @@ import com.google.gson.annotations.SerializedName
 data class ListSurahResponse(
 
 	@field:SerializedName("data")
-	val listSurahResponseItem: List<ListSurahResponseItem>
+	val listSurahResponseItem: List<SurahResponseItem>
 )
 
-data class ListSurahResponseItem(
+data class SurahResponseItem(
 
 	@field:SerializedName("keterangan")
 	val keterangan: String,
