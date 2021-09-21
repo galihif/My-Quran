@@ -11,4 +11,6 @@
     <string name="surah_title">الفاتحة</string>
     <string name="loading">Loading...</string>
     <string name="play_audio">Play Audio</string>
+    <string name="content_ayat">الْحَمْدُ لِلَّهِ رَبِّ الْعٰلَمِينَ</string>
+    <string name="ayat_arti">[All] praise is [due] to Allah, Lord of the worlds -</string>
 </resources>

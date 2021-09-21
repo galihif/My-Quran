@@ -10,6 +10,7 @@
     tools:context=".ui.surah.SurahActivity">
 
     <TextView
+        android:id="@+id/tv_surah_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -34,8 +35,8 @@
                 android:id="@+id/rv_ayat"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:listitem="@layout/item_surah"
-                android:layout_marginTop="16dp"/>
+                tools:listitem="@layout/item_ayat"
+                android:layout_marginTop="24dp"/>
 
         </LinearLayout>
 
