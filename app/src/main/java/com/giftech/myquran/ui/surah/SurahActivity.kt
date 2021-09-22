@@ -1,15 +1,22 @@
 package com.giftech.myquran.ui.surah
 
 import android.annotation.SuppressLint
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.giftech.myquran.R
 import com.giftech.myquran.data.source.local.entity.SurahEntity
 import com.giftech.myquran.databinding.ActivitySurahBinding
 import com.giftech.myquran.viewmodel.ViewModelFactory
+import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.Player
+import com.google.android.exoplayer2.SimpleExoPlayer
+
 
 class SurahActivity : AppCompatActivity() {
 
@@ -18,6 +25,9 @@ class SurahActivity : AppCompatActivity() {
     }
 
     private lateinit var binding:ActivitySurahBinding
+    private lateinit var player: SimpleExoPlayer
+    private var isPlayed = false
+    private var isPaused = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,13 +65,69 @@ class SurahActivity : AppCompatActivity() {
             tvSurahName.text = surah.nama
             tvSurahArti.text = surah.arti
             tvSurahTypeAyat.text = "${surah.type} - ${surah.ayat} AYAT"
+
+            player = SimpleExoPlayer.Builder(this@SurahActivity).build()
+
+            btnAudio.setOnClickListener {
+                if(isPlayed){
+                    pausePlayer()
+                    btnAudio.setImageResource(R.drawable.ic_play)
+                }else{
+                    if(isPaused){
+                        resumePlayer()
+                    }else{
+                        playAudio(surah.audio)
+                    }
+                    btnAudio.setImageResource(R.drawable.ic_pause)
+                }
+            }
+
+            player.addListener(object : Player.EventListener {
+                override fun onPlaybackStateChanged(state: Int) {
+                    if (state == Player.STATE_ENDED) {
+                        btnAudio.setImageResource(R.drawable.ic_play)
+                    }
+                }
+            })
         }
+
         with(binding){
             tvSurahName.text = surah.nama
             tvSurahName.setOnClickListener {
                 onBackPressed()
+                player.stop()
             }
         }
+    }
+
+    private fun playAudio(audio: String) {
+        val mediaItem: MediaItem = MediaItem.fromUri(Uri.parse(audio))
+        // Set the media item to be played.
+        player.setMediaItem(mediaItem)
+        // Prepare the player.
+        player.prepare()
+        // Start the playback.
+        player.play()
+
+        isPlayed = true
+
+        Toast.makeText(this@SurahActivity, "Playing", Toast.LENGTH_LONG).show()
+    }
+
+    private fun pausePlayer() {
+        isPlayed = false
+        isPaused = true
+
+        player.playWhenReady = false
+        player.playbackState
+    }
+
+    private fun resumePlayer() {
+        isPaused = false
+        isPlayed = true
+
+        player.playWhenReady = true
+        player.playbackState
     }
 
     private fun setLoading(isLoading:Boolean){
