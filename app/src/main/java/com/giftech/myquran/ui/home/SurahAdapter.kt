@@ -41,7 +41,7 @@ class SurahAdapter:RecyclerView.Adapter<SurahAdapter.SurahViewHolder>() {
 
                 itemView.setOnClickListener {
                     val intent = Intent(itemView.context, SurahActivity::class.java)
-                    intent.putExtra(SurahActivity.EXTRA_SURAH, surah.nomor)
+                    intent.putExtra(SurahActivity.EXTRA_SURAH, surah)
                     itemView.context.startActivity(intent)
                 }
             }
