@@ -30,9 +30,11 @@ class AyatAdapter: RecyclerView.Adapter<AyatAdapter.AyatViewHolder>() {
     override fun getItemCount(): Int = listAyat.size
 
     class AyatViewHolder(private val binding: ItemAyatBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(surah: AyatEntity){
+        fun bind(ayat: AyatEntity){
             with(binding){
-
+                tvAyatNumber.text = ayat.nomor.toString()
+                tvAyatArab.text = ayat.arab.toString()
+                tvAyatArti.text = ayat.id
             }
         }
     }
