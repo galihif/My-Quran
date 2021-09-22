@@ -19,6 +19,7 @@
         android:textColor="@color/white"/>
 
     <TextView
+        android:id="@+id/tv_surah_arti"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -39,6 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="MEXICAN - 7 AYAT"
+        android:textAllCaps="true"
         android:textSize="14sp"
         android:textColor="@color/white"
         android:fontFamily="@font/poppins_medium"/>
