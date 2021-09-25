@@ -56,6 +56,7 @@
         android:padding="20dp">
 
         <TextView
+            android:id="@+id/last_read"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_medium"
@@ -68,7 +69,7 @@
             app:drawableLeftCompat="@drawable/ic_last_read" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/tv_ayat_lastread"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins"
@@ -79,13 +80,14 @@
             tools:text="Ayat 1" />
 
         <TextView
+            android:id="@+id/tv_surah_lastread"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
             android:fontFamily="@font/poppins_semibold"
             android:textColor="@color/white"
             android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/textView4"
+            app:layout_constraintBottom_toTopOf="@+id/tv_ayat_lastread"
             app:layout_constraintStart_toStartOf="parent"
             tools:text="Al-Fatihah" />
 

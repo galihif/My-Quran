@@ -1,9 +1,12 @@
 package com.giftech.myquran.data
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.giftech.myquran.data.source.local.entity.AyatEntity
+import com.giftech.myquran.data.source.local.entity.LastReadAyatEntity
 import com.giftech.myquran.data.source.local.entity.SurahEntity
+import com.giftech.myquran.data.source.local.preferences.Preferences
 import com.giftech.myquran.data.source.remote.RemoteDataSource
 import com.giftech.myquran.data.source.remote.response.AyatResponseItem
 import com.giftech.myquran.data.source.remote.response.SurahResponseItem
@@ -11,6 +14,10 @@ import com.giftech.myquran.data.source.remote.response.SurahResponseItem
 class SurahRepository private constructor(
     private val remoteDataSource: RemoteDataSource
 ):SurahDataSource{
+
+    private val _lastRead = MutableLiveData<LastReadAyatEntity>()
+    val lastRead:LiveData<LastReadAyatEntity>
+        get() = _lastRead
 
     companion object {
         @Volatile
@@ -61,6 +68,19 @@ class SurahRepository private constructor(
         })
 
         return listAyat
+    }
+
+    override fun setLastRead(context: Context,ayat: LastReadAyatEntity) {
+        val preferences = Preferences(context)
+        preferences.setAyat(ayat)
+        _lastRead.postValue(ayat)
+    }
+
+    override fun getLastRead(context: Context): LiveData<LastReadAyatEntity> {
+        val preferences = Preferences(context)
+        val ayatRes = preferences.getAyat()
+        _lastRead.postValue(ayatRes)
+        return _lastRead
     }
 
 }
