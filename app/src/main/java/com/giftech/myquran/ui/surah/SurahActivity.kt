@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.giftech.myquran.R
+import com.giftech.myquran.data.source.local.entity.AyatEntity
+import com.giftech.myquran.data.source.local.entity.LastReadAyatEntity
 import com.giftech.myquran.data.source.local.entity.SurahEntity
 import com.giftech.myquran.databinding.ActivitySurahBinding
 import com.giftech.myquran.viewmodel.ViewModelFactory
@@ -49,6 +51,18 @@ class SurahActivity : AppCompatActivity() {
             viewmodel.getAyatByNomorSurah(surah.nomor).observe(this,{ res ->
                 adapter.setList(res)
                 setLoading(false)
+            })
+
+            viewmodel.getLastRead().observe(this, {lastRead ->
+                adapter.setLastRead(lastRead)
+            })
+
+            adapter.onBookmarkClicked(object : AyatAdapter.BookmarkCallback{
+                override fun onResponseReceived(ayat: AyatEntity) {
+                    val text = "Surah ${surah.nama} Ayat ${ayat.nomor} saved to last read"
+                    Toast.makeText(this@SurahActivity, text, Toast.LENGTH_SHORT).show()
+                    viewmodel.setLastRead(LastReadAyatEntity(ayat.nomor,ayat.nomorSurah,surah.nama))
+                }
             })
 
             with(binding.rvAyat){

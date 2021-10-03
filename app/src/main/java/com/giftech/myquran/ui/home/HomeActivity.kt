@@ -5,7 +5,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.giftech.myquran.data.source.local.entity.LastReadAyatEntity
+import com.giftech.myquran.R
 import com.giftech.myquran.databinding.ActivityHomeBinding
 import com.giftech.myquran.viewmodel.ViewModelFactory
 
@@ -35,19 +35,12 @@ class HomeActivity : AppCompatActivity() {
 
         viewmodel.getLastRead().observe(this,{ayat ->
             binding.tvSurahLastread.text = ayat.namaSurah
-            binding.tvAyatLastread.text = "Ayat ${ayat.nomorAyat}"
+            binding.tvAyatLastread.text = getString(R.string.last_read_ayat,ayat.nomorAyat)
         })
 
-        binding.lastRead.setOnClickListener {
-            val ayat = LastReadAyatEntity()
-            ayat.nomorSurah = 1
-            ayat.nomorAyat = 20
-            ayat.namaSurah = "Yasin"
-            viewmodel.setLastRead(ayat)
-        }
     }
 
-    fun setLoading(isLoading:Boolean){
+    private fun setLoading(isLoading:Boolean){
         if(isLoading){
             binding.rvSurah.visibility = View.GONE
             binding.loading.visibility = View.VISIBLE

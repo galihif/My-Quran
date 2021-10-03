@@ -16,6 +16,10 @@ class SurahRepository private constructor(
 ):SurahDataSource{
 
 
+    private val _lastReadAyat = MutableLiveData<LastReadAyatEntity>()
+//    val lastReadAyat:LiveData<LastReadAyatEntity>
+//        get() = _lastReadAyat
+
     companion object {
         @Volatile
         private var instance: SurahRepository? = null
@@ -68,14 +72,13 @@ class SurahRepository private constructor(
     }
 
     override fun setLastRead(ayat: LastReadAyatEntity) {
+        _lastReadAyat.postValue(ayat)
         preferences.setAyat(ayat)
     }
 
     override fun getLastRead(): LiveData<LastReadAyatEntity> {
-        val ayat = MutableLiveData<LastReadAyatEntity>()
-        ayat.postValue(preferences.getAyat())
-
-        return ayat
+        _lastReadAyat.postValue(preferences.getAyat())
+        return _lastReadAyat
     }
 
     override fun getIsFirstLaunch(): Boolean {

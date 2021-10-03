@@ -4,6 +4,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.giftech.myquran.R
 import com.giftech.myquran.data.source.local.entity.SurahEntity
 import com.giftech.myquran.databinding.ItemSurahBinding
 import com.giftech.myquran.ui.surah.SurahActivity
@@ -36,8 +37,7 @@ class SurahAdapter:RecyclerView.Adapter<SurahAdapter.SurahViewHolder>() {
                 tvSurahNumber.text = surah.nomor.toString()
                 tvSurahName.text = surah.nama
                 tvSurahArab.text = surah.asma
-                tvSurahTypeAyat.text ="${surah.type} - ${surah.ayat} AYAT"
-
+                tvSurahTypeAyat.text = itemView.context.getString(R.string.surah_type_ayat,surah.type,surah.ayat)
 
                 itemView.setOnClickListener {
                     val intent = Intent(itemView.context, SurahActivity::class.java)
