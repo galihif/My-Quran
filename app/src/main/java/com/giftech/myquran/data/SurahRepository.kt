@@ -12,7 +12,8 @@ import com.giftech.myquran.data.source.remote.response.AyatResponseItem
 import com.giftech.myquran.data.source.remote.response.SurahResponseItem
 
 class SurahRepository private constructor(
-    private val remoteDataSource: RemoteDataSource
+    private val remoteDataSource: RemoteDataSource,
+    private val preferences: Preferences
 ):SurahDataSource{
 
     private val _lastRead = MutableLiveData<LastReadAyatEntity>()
@@ -22,9 +23,9 @@ class SurahRepository private constructor(
     companion object {
         @Volatile
         private var instance: SurahRepository? = null
-        fun getInstance(remoteData: RemoteDataSource): SurahRepository =
+        fun getInstance(remoteData: RemoteDataSource, prefs:Preferences): SurahRepository =
             instance ?: synchronized(this) {
-                instance ?: SurahRepository(remoteData).apply { instance = this }
+                instance ?: SurahRepository(remoteData,prefs).apply { instance = this }
             }
     }
 
@@ -71,13 +72,11 @@ class SurahRepository private constructor(
     }
 
     override fun setLastRead(context: Context,ayat: LastReadAyatEntity) {
-        val preferences = Preferences(context)
         preferences.setAyat(ayat)
         _lastRead.postValue(ayat)
     }
 
     override fun getLastRead(context: Context): LiveData<LastReadAyatEntity> {
-        val preferences = Preferences(context)
         val ayatRes = preferences.getAyat()
         _lastRead.postValue(ayatRes)
         return _lastRead

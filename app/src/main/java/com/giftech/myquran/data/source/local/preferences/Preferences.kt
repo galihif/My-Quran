@@ -3,13 +3,20 @@ package com.giftech.myquran.data.source.local.preferences
 import android.content.Context
 import com.giftech.myquran.data.source.local.entity.LastReadAyatEntity
 
-internal class Preferences(context:Context) {
+class Preferences(private val context: Context) {
     companion object {
         private const val PREFS_NAME = "ayat_pref"
         private const val NOMOR_AYAT = "NOMOR_AYAT"
         private const val NOMOR_SURAH = "NOMOR_SURAH"
         private const val NAMA_SURAH = "NAMA_SURAH"
         private const val FIRST_LAUNCH = "FIRST_LAUNCH"
+
+        @Volatile
+        private var instance: Preferences? = null
+        fun getInstance(mContext:Context): Preferences =
+            instance ?: synchronized(this) {
+                instance ?: Preferences(mContext.applicationContext).apply { instance = this }
+            }
     }
 
     private val preferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
