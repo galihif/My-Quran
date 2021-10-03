@@ -12,4 +12,6 @@ class HomeViewModel(private val surahRepository: SurahRepository):ViewModel() {
 
     fun getLastRead():LiveData<LastReadAyatEntity> = surahRepository.getLastRead()
 
+    fun getLastSurah():LiveData<SurahEntity> = surahRepository.getLastSurah()
+
 }

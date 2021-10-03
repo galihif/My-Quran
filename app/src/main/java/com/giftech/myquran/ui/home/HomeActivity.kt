@@ -1,17 +1,23 @@
 package com.giftech.myquran.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.giftech.myquran.R
+import com.giftech.myquran.data.source.local.entity.LastReadAyatEntity
+import com.giftech.myquran.data.source.local.entity.SurahEntity
 import com.giftech.myquran.databinding.ActivityHomeBinding
+import com.giftech.myquran.ui.surah.SurahActivity
 import com.giftech.myquran.viewmodel.ViewModelFactory
 
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomeBinding
+    private lateinit var lastReadAyat:LastReadAyatEntity
+    private lateinit var surah:SurahEntity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,15 +34,28 @@ class HomeActivity : AppCompatActivity() {
             setLoading(false)
         })
 
+        viewmodel.getLastRead().observe(this,{ayat ->
+            lastReadAyat = ayat
+            binding.tvSurahLastread.text = ayat.namaSurah
+            binding.tvAyatLastread.text = getString(R.string.last_read_ayat,ayat.nomorAyat)
+            adapter.setLastRead(ayat)
+        })
+
+        viewmodel.getLastSurah().observe(this, {surahRes->
+            this.surah = surahRes
+        })
+
         with(binding.rvSurah){
             this.layoutManager = LinearLayoutManager(context)
             this.adapter = adapter
         }
 
-        viewmodel.getLastRead().observe(this,{ayat ->
-            binding.tvSurahLastread.text = ayat.namaSurah
-            binding.tvAyatLastread.text = getString(R.string.last_read_ayat,ayat.nomorAyat)
-        })
+        binding.btnLastRead.setOnClickListener {
+            val intent = Intent(this, SurahActivity::class.java)
+            intent.putExtra(SurahActivity.EXTRA_SURAH, surah)
+            intent.putExtra(SurahActivity.EXTRA_LASTREAD, lastReadAyat)
+            startActivity(intent)
+        }
 
     }
 

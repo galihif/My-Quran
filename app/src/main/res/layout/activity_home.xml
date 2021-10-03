@@ -49,6 +49,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/btn_last_read"
         android:layout_width="match_parent"
         android:layout_height="140dp"
         android:background="@drawable/ic_bg_last_read"
