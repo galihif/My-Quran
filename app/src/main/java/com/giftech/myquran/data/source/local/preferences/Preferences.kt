@@ -68,17 +68,16 @@ class Preferences(val context: Context) {
         }.apply()
     }
 
-    fun getSurah():SurahEntity{
-        val surah = SurahEntity(
-            preferences.getString(NAMA_SURAH,"")!!,
-            preferences.getString(ASMA_SURAH,"")!!,
-            preferences.getString(ARTI_SURAH,"")!!,
+    fun getSurah(): SurahEntity {
+        return SurahEntity(
+            preferences.getString(NAMA_SURAH, "")!!,
+            preferences.getString(ASMA_SURAH, "")!!,
+            preferences.getString(ARTI_SURAH, "")!!,
             preferences.getInt(AYAT_SURAH, 0),
             preferences.getInt(NOMOR_SURAH, 0),
-            preferences.getString(AUDIO_SURAH,"")!!,
-            preferences.getString(TYPE_SURAH,"")!!,
+            preferences.getString(AUDIO_SURAH, "")!!,
+            preferences.getString(TYPE_SURAH, "")!!,
 
-        )
-        return surah
+            )
     }
 }

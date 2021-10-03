@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.giftech.myquran.data.SurahRepository
 import com.giftech.myquran.data.source.local.entity.AyatEntity
 import com.giftech.myquran.data.source.local.entity.LastReadAyatEntity
+import com.giftech.myquran.data.source.local.entity.SurahEntity
 
 class SurahViewModel(private val surahRepository: SurahRepository): ViewModel() {
 
@@ -13,4 +14,6 @@ class SurahViewModel(private val surahRepository: SurahRepository): ViewModel() 
     fun getLastRead():LiveData<LastReadAyatEntity> = surahRepository.getLastRead()
 
     fun setLastRead(ayatEntity: LastReadAyatEntity) = surahRepository.setLastRead(ayatEntity)
+
+    fun setLastSurah(surah:SurahEntity) = surahRepository.setLastSurah(surah)
 }

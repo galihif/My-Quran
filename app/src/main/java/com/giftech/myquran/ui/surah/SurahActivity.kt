@@ -24,6 +24,7 @@ class SurahActivity : AppCompatActivity() {
 
     companion object{
         const val EXTRA_SURAH = "1"
+        const val EXTRA_LASTREAD = "2"
     }
 
     private lateinit var binding:ActivitySurahBinding
@@ -43,6 +44,7 @@ class SurahActivity : AppCompatActivity() {
         val extras = intent.extras
         if(extras!=null){
             val surah = extras.getParcelable<SurahEntity>(EXTRA_SURAH)
+            val lastReadAyat = extras.getParcelable<LastReadAyatEntity>(EXTRA_LASTREAD)
 
             Log.d("galih", surah.toString())
             populateView(surah!!)
@@ -62,12 +64,16 @@ class SurahActivity : AppCompatActivity() {
                     val text = "Surah ${surah.nama} Ayat ${ayat.nomor} saved to last read"
                     Toast.makeText(this@SurahActivity, text, Toast.LENGTH_SHORT).show()
                     viewmodel.setLastRead(LastReadAyatEntity(ayat.nomor,ayat.nomorSurah,surah.nama))
+                    viewmodel.setLastSurah(surah)
                 }
             })
 
             with(binding.rvAyat){
                 this.layoutManager = LinearLayoutManager(context)
                 this.adapter = adapter
+                if(surah.nomor == lastReadAyat?.nomorSurah){
+                    scrollToPosition(lastReadAyat.nomorAyat-1)
+                }
             }
         }
 
