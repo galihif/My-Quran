@@ -1,9 +1,11 @@
 package com.giftech.myquran.data.source.local.preferences
 
+import android.annotation.SuppressLint
 import android.content.Context
 import com.giftech.myquran.data.source.local.entity.LastReadAyatEntity
+import com.giftech.myquran.data.source.local.entity.SurahEntity
 
-class Preferences(private val context: Context) {
+class Preferences(val context: Context) {
     companion object {
         private const val PREFS_NAME = "ayat_pref"
         private const val NOMOR_AYAT = "NOMOR_AYAT"
@@ -11,6 +13,13 @@ class Preferences(private val context: Context) {
         private const val NAMA_SURAH = "NAMA_SURAH"
         private const val FIRST_LAUNCH = "FIRST_LAUNCH"
 
+        private const val ASMA_SURAH="ASMA_SURAH"
+        private const val ARTI_SURAH="ARTI_SURAH"
+        private const val AYAT_SURAH="AYAT_SURAH"
+        private const val AUDIO_SURAH="AUDIO_SURAH"
+        private const val TYPE_SURAH="TYPE_SURAH"
+
+        @SuppressLint("StaticFieldLeak")
         @Volatile
         private var instance: Preferences? = null
         fun getInstance(mContext:Context): Preferences =
@@ -45,5 +54,31 @@ class Preferences(private val context: Context) {
         ayat.nomorSurah = preferences.getInt(NOMOR_SURAH,0)
         ayat.namaSurah = preferences.getString(NAMA_SURAH,"")!!
         return ayat
+    }
+
+    fun setSurah(surah:SurahEntity){
+        preferences.edit().apply {
+            putString(NAMA_SURAH,surah.nama)
+            putString(ASMA_SURAH,surah.asma)
+            putString(ARTI_SURAH,surah.arti)
+            putInt(AYAT_SURAH, surah.ayat)
+            putInt(NOMOR_SURAH, surah.nomor)
+            putString(AUDIO_SURAH, surah.audio)
+            putString(TYPE_SURAH, surah.type)
+        }.apply()
+    }
+
+    fun getSurah():SurahEntity{
+        val surah = SurahEntity(
+            preferences.getString(NAMA_SURAH,"")!!,
+            preferences.getString(ASMA_SURAH,"")!!,
+            preferences.getString(ARTI_SURAH,"")!!,
+            preferences.getInt(AYAT_SURAH, 0),
+            preferences.getInt(NOMOR_SURAH, 0),
+            preferences.getString(AUDIO_SURAH,"")!!,
+            preferences.getString(TYPE_SURAH,"")!!,
+
+        )
+        return surah
     }
 }

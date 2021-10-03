@@ -19,6 +19,7 @@ class SurahRepository private constructor(
     private val _lastReadAyat = MutableLiveData<LastReadAyatEntity>()
 //    val lastReadAyat:LiveData<LastReadAyatEntity>
 //        get() = _lastReadAyat
+    private val _lastSurah = MutableLiveData<SurahEntity>()
 
     companion object {
         @Volatile
@@ -69,6 +70,16 @@ class SurahRepository private constructor(
         })
 
         return listAyat
+    }
+
+    override fun setLastSurah(surah: SurahEntity) {
+        _lastSurah.postValue(surah)
+        preferences.setSurah(surah)
+    }
+
+    override fun getLastSurah(): LiveData<SurahEntity> {
+        _lastSurah.postValue(preferences.getSurah())
+        return _lastSurah
     }
 
     override fun setLastRead(ayat: LastReadAyatEntity) {

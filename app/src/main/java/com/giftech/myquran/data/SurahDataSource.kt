@@ -13,6 +13,9 @@ interface SurahDataSource {
     fun setLastRead(ayat: LastReadAyatEntity)
     fun getLastRead():LiveData<LastReadAyatEntity>
 
+    fun setLastSurah(surah:SurahEntity)
+    fun getLastSurah():LiveData<SurahEntity>
+
     fun getIsFirstLaunch():Boolean
     fun setFirstLaunch()
 }
