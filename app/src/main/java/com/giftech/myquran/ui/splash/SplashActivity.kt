@@ -26,6 +26,7 @@ class SplashActivity : AppCompatActivity() {
         binding.btnGetStarted.setOnClickListener {
             if(viewmodel.isFirstLaunch()){
                 viewmodel.setLastReadFirst()
+                viewmodel.setSurahFirst()
                 viewmodel.setFirstLaunch()
             }
             val intent = Intent(this, HomeActivity::class.java)
