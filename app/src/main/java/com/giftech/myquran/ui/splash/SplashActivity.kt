@@ -4,10 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import com.giftech.myquran.data.source.local.entity.LastReadAyatEntity
-import com.giftech.myquran.data.source.local.preferences.Preferences
+import androidx.lifecycle.ViewModelProvider
 import com.giftech.myquran.databinding.ActivitySplashBinding
 import com.giftech.myquran.ui.home.HomeActivity
+import com.giftech.myquran.viewmodel.ViewModelFactory
 
 class SplashActivity : AppCompatActivity() {
 
@@ -20,17 +20,14 @@ class SplashActivity : AppCompatActivity() {
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
-        binding.btnGetStarted.setOnClickListener {
-            val preferences = Preferences(this)
-            if(preferences.getIfFirstLaunch()){
-                val ayat = LastReadAyatEntity()
-                ayat.nomorAyat = 1
-                ayat.nomorSurah = 1
-                ayat.namaSurah = "Al-Fatihah"
-                preferences.setAyat(ayat)
-                preferences.setFirstLaunch()
-            }
+        val factory = ViewModelFactory.getInstance(this)
+        val viewmodel = ViewModelProvider(this,factory)[SplashViewModel::class.java]
 
+        binding.btnGetStarted.setOnClickListener {
+            if(viewmodel.isFirstLaunch()){
+                viewmodel.setLastReadFirst()
+                viewmodel.setFirstLaunch()
+            }
             val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
             finish()
