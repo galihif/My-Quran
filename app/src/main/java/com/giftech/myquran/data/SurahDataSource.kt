@@ -7,7 +7,7 @@ import com.giftech.myquran.data.source.local.entity.SurahEntity
 
 interface SurahDataSource {
 
-    fun getAllSurah():LiveData<List<SurahEntity>>
+    fun getAllSurah(): LiveData<Resource<List<SurahEntity>>>
     fun getAyatByNomorSurah(nomorSurah:Int):LiveData<List<AyatEntity>>
 
     fun setLastRead(ayat: LastReadAyatEntity)

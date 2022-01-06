@@ -15,9 +15,11 @@ class SurahAdapter:RecyclerView.Adapter<SurahAdapter.SurahViewHolder>() {
     private var listSurah = ArrayList<SurahEntity>()
     private lateinit var lastReadAyat: LastReadAyatEntity
 
-    fun setList(list: List<SurahEntity>){
+    fun setList(list: List<SurahEntity>?){
         listSurah.clear()
-        listSurah.addAll(list)
+        if (list != null) {
+            listSurah.addAll(list)
+        }
         notifyDataSetChanged()
     }
 

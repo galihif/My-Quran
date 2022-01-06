@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.giftech.myquran.R
+import com.giftech.myquran.data.Resource
 import com.giftech.myquran.data.source.local.entity.LastReadAyatEntity
 import com.giftech.myquran.data.source.local.entity.SurahEntity
 import com.giftech.myquran.databinding.ActivityHomeBinding
@@ -29,9 +30,19 @@ class HomeActivity : AppCompatActivity() {
         val adapter = SurahAdapter()
 
         setLoading(true)
-        viewmodel.getAllSurah().observe(this, {list ->
-            adapter.setList(list)
-            setLoading(false)
+        viewmodel.getAllSurah().observe(this, {listSurah ->
+            if (listSurah != null){
+                when(listSurah){
+                    is Resource.Loading -> setLoading(true)
+                    is Resource.Success -> {
+                        setLoading(false)
+                        adapter.setList(listSurah.data)
+                    }
+                    is Resource.Error -> {
+                        setLoading(false)
+                    }
+                }
+            }
         })
 
         viewmodel.getLastRead().observe(this,{ayat ->
