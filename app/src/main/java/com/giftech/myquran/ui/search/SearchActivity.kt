@@ -36,6 +36,10 @@ class SearchActivity : AppCompatActivity() {
             }
         })
 
+        viewmodel.getLastRead().observe(this,{ayat ->
+            adapter.setLastRead(ayat)
+        })
+
         binding.btnBack.setOnClickListener {
             onBackPressed()
         }
