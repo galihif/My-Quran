@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.giftech.myquran.data.SurahRepository
 import com.giftech.myquran.di.Injection
 import com.giftech.myquran.ui.home.HomeViewModel
+import com.giftech.myquran.ui.search.SearchViewModel
 import com.giftech.myquran.ui.splash.SplashViewModel
 import com.giftech.myquran.ui.surah.SurahViewModel
 
@@ -39,6 +40,9 @@ class ViewModelFactory private constructor(private val mSurahRepository: SurahRe
             }
             modelClass.isAssignableFrom(SplashViewModel::class.java)->{
                 return SplashViewModel(mSurahRepository) as T
+            }
+            modelClass.isAssignableFrom(SearchViewModel::class.java)->{
+                return SearchViewModel(mSurahRepository) as T
             }
 
             else -> throw Throwable("Unknown ViewModel class: " + modelClass.name)
