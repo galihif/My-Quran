@@ -16,4 +16,8 @@ interface SurahDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertSurah(listSurah: List<SurahEntity>)
 
+    @Query("SELECT * FROM surah WHERE nama LIKE '%' || :keyword || '%'")
+    fun getSurahByName(keyword:String):LiveData<List<SurahEntity>>
+
+
 }

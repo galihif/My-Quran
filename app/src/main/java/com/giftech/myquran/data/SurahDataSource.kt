@@ -10,6 +10,8 @@ interface SurahDataSource {
     fun getAllSurah(): LiveData<Resource<List<SurahEntity>>>
     fun getAyatByNomorSurah(nomorSurah:Int):LiveData<List<AyatEntity>>
 
+    fun getSurahByName(keyword:String):LiveData<List<SurahEntity>>
+
     fun setLastRead(ayat: LastReadAyatEntity)
     fun getLastRead():LiveData<LastReadAyatEntity>
 

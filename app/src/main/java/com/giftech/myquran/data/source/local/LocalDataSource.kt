@@ -23,6 +23,8 @@ class LocalDataSource private constructor(
 
     fun insertSurah(listSurah: List<SurahEntity>) = surahDao.insertSurah(listSurah)
 
+    fun getSurahByName(keyword:String):LiveData<List<SurahEntity>> = surahDao.getSurahByName(keyword)
+
     fun setLastSurah(surah:SurahEntity){
         preferences.setSurah(surah)
     }
