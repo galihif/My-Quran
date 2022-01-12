@@ -11,6 +11,7 @@ import com.giftech.myquran.data.Resource
 import com.giftech.myquran.data.source.local.entity.LastReadAyatEntity
 import com.giftech.myquran.data.source.local.entity.SurahEntity
 import com.giftech.myquran.databinding.ActivityHomeBinding
+import com.giftech.myquran.ui.search.SearchActivity
 import com.giftech.myquran.ui.surah.SurahActivity
 import com.giftech.myquran.viewmodel.ViewModelFactory
 
@@ -65,6 +66,11 @@ class HomeActivity : AppCompatActivity() {
             val intent = Intent(this, SurahActivity::class.java)
             intent.putExtra(SurahActivity.EXTRA_SURAH, surah)
             intent.putExtra(SurahActivity.EXTRA_LASTREAD, lastReadAyat)
+            startActivity(intent)
+        }
+
+        binding.btnSearch.setOnClickListener {
+            val intent = Intent(this, SearchActivity::class.java)
             startActivity(intent)
         }
 

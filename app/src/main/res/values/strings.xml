@@ -15,4 +15,5 @@
     <string name="last_read_ayat">Ayat %1$d</string>
     <string name="surah_type_ayat">%1$s - %2$d AYAT</string>
     <string name="ayat_arti">[All] praise is [due] to Allah, Lord of the worlds -</string>
+    <string name="search_surah">Search Surah</string>
 </resources>

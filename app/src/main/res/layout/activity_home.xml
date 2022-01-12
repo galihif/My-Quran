@@ -37,12 +37,12 @@
 <!--            android:contentDescription="@string/search"-->
 <!--            android:src="@drawable/ic_search_24" />-->
 
-        <androidx.appcompat.widget.SearchView
+        <ImageView
             android:id="@+id/btn_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|end"
-            app:searchIcon="@drawable/ic_search_24"/>
+            android:src="@drawable/ic_search_24"/>
 
     </LinearLayout>
 
