@@ -115,9 +115,17 @@ class SurahActivity : AppCompatActivity() {
             tvSurahName.text = surah.nama
             tvSurahName.setOnClickListener {
                 onBackPressed()
-                player.stop()
             }
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        stopAudio()
+    }
+
+    private fun stopAudio(){
+        player.stop()
     }
 
     private fun playAudio(audio: String) {
