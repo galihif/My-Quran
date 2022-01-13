@@ -59,4 +59,7 @@ dependencies {
     //Room
     implementation "androidx.room:room-runtime:2.2.5"
     kapt "androidx.room:room-compiler:2.2.3"
+
+    //Shimmer
+    implementation "com.facebook.shimmer:shimmer:0.5.0"
 }

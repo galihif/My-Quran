@@ -119,14 +119,24 @@
         android:visibility="gone"
         tools:listitem="@layout/item_surah"/>
 
-   <TextView
-       android:id="@+id/loading"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:layout_gravity="center"
-       android:layout_marginTop="64dp"
-       android:text="@string/loading"
-       android:fontFamily="@font/poppins"
-       android:textSize="16sp"
-       android:textColor="@color/purple_500"/>
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/loading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:shimmer_auto_start="true">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <include layout="@layout/item_surah_load"/>
+                <include layout="@layout/item_surah_load" />
+                <include layout="@layout/item_surah_load" />
+                <include layout="@layout/item_surah_load" />
+                <include layout="@layout/item_surah_load" />
+            </LinearLayout>
+        </ScrollView>
+    </com.facebook.shimmer.ShimmerFrameLayout>
 </LinearLayout>
