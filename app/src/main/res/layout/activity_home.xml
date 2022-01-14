@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="24dp"
+    android:paddingHorizontal="24dp"
+    android:paddingTop="24dp"
     android:orientation="vertical"
     tools:context=".ui.home.HomeActivity">
 
@@ -28,15 +29,6 @@
             android:text="@string/title"
             android:textSize="24sp" />
 
-<!--        <ImageButton-->
-<!--            android:id="@+id/btn_search"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center_vertical|end"-->
-<!--            android:background="@color/white"-->
-<!--            android:contentDescription="@string/search"-->
-<!--            android:src="@drawable/ic_search_24" />-->
-
         <ImageView
             android:id="@+id/btn_search"
             android:layout_width="wrap_content"
@@ -51,7 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/salam"
-        android:textSize="24sp"
+        android:textSize="18sp"
         android:fontFamily="@font/poppins_medium"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
@@ -59,7 +51,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/btn_last_read"
         android:layout_width="match_parent"
-        android:layout_height="140dp"
+        android:layout_height="120dp"
         android:background="@drawable/ic_bg_last_read"
         android:layout_marginTop="16dp"
         android:padding="20dp">
@@ -68,14 +60,14 @@
             android:id="@+id/last_read"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:drawablePadding="4dp"
             android:fontFamily="@font/poppins_medium"
             android:text="@string/last_read"
             android:textColor="@color/white"
             android:textSize="16sp"
-            android:drawablePadding="4dp"
+            app:drawableLeftCompat="@drawable/ic_last_read"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:drawableLeftCompat="@drawable/ic_last_read" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_ayat_lastread"
@@ -98,6 +90,7 @@
             android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/tv_ayat_lastread"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/last_read"
             tools:text="Al-Fatihah" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
