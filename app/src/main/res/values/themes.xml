@@ -15,7 +15,7 @@
     </style>
 
     <style name="textTitle" parent="TextAppearance.AppCompat">
-        <item name="android:textSize">28sp</item>
+        <item name="android:textSize">24sp</item>
         <item name="android:textColor">@color/purple_500</item>
         <item name="android:fontFamily">@font/poppins_bold</item>
     </style>
