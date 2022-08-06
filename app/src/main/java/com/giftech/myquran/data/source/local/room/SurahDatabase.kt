@@ -15,6 +15,7 @@ abstract class SurahDatabase: RoomDatabase() {
         @Volatile
         private var INSTANCE: SurahDatabase? = null
 
+
         fun getInstance(context: Context): SurahDatabase =
             INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
