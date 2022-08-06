@@ -26,6 +26,7 @@ abstract class SurahDatabase: RoomDatabase() {
                     .build()
                 INSTANCE = instance
                 instance
+
             }
     }
 }
