@@ -1,2 +1,4 @@
 # My-Quran
-Quran reader with Indonesian translation and in-app murottal audio
+<p align="center">
+<img src="/images/my_quran.png"/>
+</p>
