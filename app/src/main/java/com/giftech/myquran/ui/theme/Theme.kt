@@ -1,4 +1,4 @@
-package com.giftech.myquran.ui.ui.theme
+package com.giftech.myquran.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
