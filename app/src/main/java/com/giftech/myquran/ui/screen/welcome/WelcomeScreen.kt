@@ -9,6 +9,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import com.giftech.myquran.ui.theme.MyQuranTheme
 
@@ -20,7 +21,8 @@ fun WelcomeScreen() {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text("My Quran")
+            Text("My Quran",
+            fontWeight = FontWeight.Bold)
             Text("Learn Quran")
         }
     }
