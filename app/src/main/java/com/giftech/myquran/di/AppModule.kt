@@ -1,6 +1,7 @@
 package com.giftech.myquran.di
 
 import com.giftech.myquran.data.MainRepository
+import com.giftech.myquran.data.source.remote.RemoteDataSource
 import com.giftech.myquran.data.source.remote.api.ApiService
 import dagger.Module
 import dagger.Provides
@@ -35,5 +36,9 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideRepository(apiService: ApiService) = MainRepository(apiService)
+    fun provideRemoteDataSource(api: ApiService):RemoteDataSource = RemoteDataSource(api)
+
+    @Provides
+    @Singleton
+    fun provideRepository(remote:RemoteDataSource) = MainRepository(remote)
 }

@@ -11,6 +11,9 @@ interface ApiService {
     @GET("/surah")
     fun getAllSurah():Call<ListSurahResponse>
 
+    @GET("/surah")
+    suspend fun getListSurah():ListSurahResponse
+
     @GET("/surah/{nomorSurah}")
     fun getAyatByNomorSurah(@Path("nomorSurah") nomorSurah:Int):Call<ListAyatResponse>
 

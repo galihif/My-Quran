@@ -5,14 +5,19 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.giftech.myquran.data.source.remote.api.ApiConfig
 import com.giftech.myquran.data.source.remote.api.ApiResponse
+import com.giftech.myquran.data.source.remote.api.ApiService
 import com.giftech.myquran.data.source.remote.response.AyatResponseItem
 import com.giftech.myquran.data.source.remote.response.ListAyatResponse
 import com.giftech.myquran.data.source.remote.response.ListSurahResponse
 import com.giftech.myquran.data.source.remote.response.SurahResponseItem
+import kotlinx.coroutines.flow.Flow
 import retrofit2.Call
 import retrofit2.Response
+import javax.inject.Inject
 
-class RemoteDataSource {
+class RemoteDataSource @Inject constructor(
+    private val api:ApiService
+) {
 
     companion object{
         @Volatile
@@ -20,7 +25,7 @@ class RemoteDataSource {
 
         fun getInstance(): RemoteDataSource =
             instance ?: synchronized(this) {
-                instance ?: RemoteDataSource().apply { instance = this }
+                instance ?: RemoteDataSource(ApiConfig.getApiService()).apply { instance = this }
             }
     }
 
@@ -43,6 +48,9 @@ class RemoteDataSource {
 //        })
 //    }
 //
+
+    suspend fun getListSurah() = api.getListSurah()
+
     fun getAllSurah(): LiveData<ApiResponse<List<SurahResponseItem>>> {
         val resultData = MutableLiveData<ApiResponse<List<SurahResponseItem>>>()
         val client = ApiConfig.getApiService().getAllSurah()
