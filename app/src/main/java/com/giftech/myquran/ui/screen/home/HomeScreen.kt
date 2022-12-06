@@ -18,6 +18,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.giftech.myquran.R
 import com.giftech.myquran.ui.components.BoxLastRead
 import com.giftech.myquran.ui.components.TextTitle
@@ -26,7 +27,9 @@ import com.giftech.myquran.ui.theme.MyQuranTheme
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun HomeScreen() {
+fun HomeScreen(
+    viewModel: HomeViewModel = hiltViewModel()
+) {
     Scaffold {
         val itemList = (0..10).map { it.toString() }
         LazyColumn(
@@ -52,7 +55,7 @@ fun HomeScreen() {
                         fontSize = 18.sp
                     )
                     BoxLastRead(
-                        surah = "Al-Baqarah",
+                        surah = viewModel.test(),
                         ayat = 8,
                         onClick = {}
                     )
