@@ -16,14 +16,15 @@ import com.giftech.myquran.ui.theme.Peach200
 @Composable
 fun GetStartedButton(
     @StringRes text:Int,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onClick:()->Unit
 ) {
     Button(
         modifier = modifier,
         shape = RoundedCornerShape(32.dp),
         contentPadding = PaddingValues(vertical = 12.dp, horizontal = 16.dp),
         colors = ButtonDefaults.buttonColors(backgroundColor = Peach200),
-        onClick = {},
+        onClick = onClick,
     ) {
         Text(stringResource(text), color = Color.White)
     }
