@@ -25,16 +25,15 @@ import com.giftech.myquran.ui.theme.MyQuranTheme
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun HomeScreen() {
-    Scaffold(
-        Modifier
-            .fillMaxWidth()
-            .padding(16.dp),
-    ) {
+    Scaffold {
         val itemList = (0..10).map { it.toString() }
         LazyColumn(
+            Modifier
+                .fillMaxWidth(),
+            contentPadding = PaddingValues(16.dp),
             verticalArrangement = Arrangement.spacedBy(4.dp)
         ) {
-            item{
+            item {
                 Column {
                     Row(
                         Modifier.fillMaxWidth(),
