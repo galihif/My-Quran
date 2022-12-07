@@ -8,5 +8,6 @@ data class Surah(
     val type:String,
     val arti:String,
     val audio:String,
-    val desc:String
+    val desc:String,
+    val listAyat:List<Ayat>? = null
 )
