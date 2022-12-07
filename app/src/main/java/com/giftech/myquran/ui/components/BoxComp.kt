@@ -4,7 +4,9 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Divider
 import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -15,6 +17,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.giftech.myquran.R
 
 @Composable
@@ -67,6 +70,66 @@ fun BoxLastRead(
                 color = Color.White
             )
 
+        }
+    }
+}
+
+@Composable
+fun BoxSurahHeader() {
+    Box(
+        Modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+    ) {
+        Image(
+            painter = painterResource(R.drawable.bg_surah_detail),
+            contentDescription = "",
+            modifier = Modifier.matchParentSize(),
+            contentScale = ContentScale.FillBounds
+        )
+        Column(
+            modifier = Modifier
+                .align(Alignment.Center)
+                .padding(24.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                "{Surah Name}",
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Medium,
+                color = Color.White
+            )
+            Text(
+                "{Surah Arti}",
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Medium,
+                color = Color.White
+            )
+            Divider(
+                Modifier
+                    .width(200.dp)
+                    .padding(vertical = 8.dp),
+                thickness = 0.5.dp,
+                color = Color.White
+            )
+            Text(
+                "{type} - {2} ayat".uppercase(),
+                fontSize = 14.sp,
+                fontWeight = FontWeight.Medium,
+                color = Color.White
+            )
+            Spacer(Modifier.height(8.dp))
+            Image(
+                painterResource(R.drawable.ic_basmalah),
+                contentDescription ="",
+            )
+            Spacer(Modifier.height(8.dp))
+            IconButton(onClick = {}) {
+                Image(
+                    painterResource(R.drawable.ic_play),
+                    contentDescription =""
+                )
+            }
         }
     }
 }
