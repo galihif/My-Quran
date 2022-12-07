@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.giftech.myquran.data.MainRepository
 import com.giftech.myquran.data.Resource
+import com.giftech.myquran.data.model.Surah
 import com.giftech.myquran.data.source.local.entity.SurahEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,8 +20,8 @@ class HomeViewModel
 ) : ViewModel() {
     fun test() = repository.test()
 
-    private val _listSurah:MutableStateFlow<Resource<List<SurahEntity>>> =MutableStateFlow(Resource.Loading())
-    val listSurah:StateFlow<Resource<List<SurahEntity>>> = _listSurah
+    private val _listSurah:MutableStateFlow<Resource<List<Surah>>> =MutableStateFlow(Resource.Loading())
+    val listSurah:StateFlow<Resource<List<Surah>>> = _listSurah
 
     private fun getListSurah(){
         viewModelScope.launch {
