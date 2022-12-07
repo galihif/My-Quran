@@ -26,7 +26,7 @@ object AppModule {
             .build()
 
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://api-alquranid.herokuapp.com")
+            .baseUrl("https://equran.id/api/")
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()
