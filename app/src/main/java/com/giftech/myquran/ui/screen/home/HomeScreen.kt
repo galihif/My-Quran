@@ -3,6 +3,7 @@ package com.giftech.myquran.ui.screen.home
 import android.annotation.SuppressLint
 import android.util.Log
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -31,11 +32,12 @@ import com.giftech.myquran.ui.theme.fontsArab
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun HomeScreen(
-    viewModel: HomeViewModel = hiltViewModel()
+    viewModel: HomeViewModel = hiltViewModel(),
+    onSurahClick: (Surah) -> Unit
 ) {
     Scaffold {
         viewModel.listSurah.collectAsState().value.let {
-            when(it){
+            when (it) {
                 is Resource.Error -> {
                     Log.d("TAG", "HomeScreen: ${it.message}")
                 }
@@ -43,8 +45,11 @@ fun HomeScreen(
                     Log.d("TAG", "HomeScreen: Loading")
                 }
                 is Resource.Success -> {
-                    if (it.data != null){
-                        HomeContent(listSurah = it.data)
+                    if (it.data != null) {
+                        HomeContent(
+                            listSurah = it.data,
+                            onSurahClicked = onSurahClick
+                        )
                     }
                 }
             }
@@ -53,7 +58,10 @@ fun HomeScreen(
 }
 
 @Composable
-fun HomeContent(listSurah:List<Surah>) {
+fun HomeContent(
+    listSurah: List<Surah>,
+    onSurahClicked: (Surah) -> Unit
+) {
     LazyColumn(
         Modifier
             .fillMaxWidth(),
@@ -90,15 +98,23 @@ fun HomeContent(listSurah:List<Surah>) {
             }
         }
         items(listSurah) {
-            SurahItem(it)
+            SurahItem(
+                surah = it,
+                onSurahClicked = onSurahClicked
+            )
         }
     }
 }
 
 @Composable
-fun SurahItem(surah: Surah) {
+fun SurahItem(
+    surah: Surah,
+    onSurahClicked: (Surah) -> Unit
+) {
     Row(
-        Modifier.fillMaxWidth(),
+        Modifier
+            .fillMaxWidth()
+            .clickable { onSurahClicked(surah) },
         verticalAlignment = Alignment.CenterVertically
     ) {
         Box(Modifier.wrapContentSize()) {
@@ -132,6 +148,6 @@ fun SurahItem(surah: Surah) {
 @Composable
 fun HomePreview() {
     MyQuranTheme {
-        HomeScreen()
+        HomeScreen() {}
     }
 }
