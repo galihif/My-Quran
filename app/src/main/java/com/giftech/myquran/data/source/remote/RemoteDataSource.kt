@@ -10,7 +10,6 @@ import com.giftech.myquran.data.source.remote.response.AyatResponseItem
 import com.giftech.myquran.data.source.remote.response.ListAyatResponse
 import com.giftech.myquran.data.source.remote.response.ListSurahResponse
 import com.giftech.myquran.data.source.remote.response.SurahResponseItem
-import kotlinx.coroutines.flow.Flow
 import retrofit2.Call
 import retrofit2.Response
 import javax.inject.Inject
@@ -29,27 +28,9 @@ class RemoteDataSource @Inject constructor(
             }
     }
 
-//    fun getAllSurah(callback: loadAllSurahCallback){
-//        val client = ApiConfig.getApiService().getAllSurah()
-//        client.enqueue(object :retrofit2.Callback<ListSurahResponse>{
-//            override fun onResponse(
-//                call: Call<ListSurahResponse>,
-//                response: Response<ListSurahResponse>
-//            ) {
-//                if(response.isSuccessful){
-//                    val listSurahResponseItem = response.body()?.listSurahResponseItem
-//                    callback.onResponseReceived(listSurahResponseItem!!)
-//                }
-//            }
-//
-//            override fun onFailure(call: Call<ListSurahResponse>, t: Throwable) {
-//                Log.e("TAG", "onFailure: ${t.message.toString()}")
-//            }
-//        })
-//    }
-//
-
     suspend fun getListSurah() = api.getListSurah()
+
+    suspend fun getDetailSurah(nomorSurah: Int) = api.getDetailSurah(nomorSurah)
 
     fun getAllSurah(): LiveData<ApiResponse<List<SurahResponseItem>>> {
         val resultData = MutableLiveData<ApiResponse<List<SurahResponseItem>>>()
@@ -100,9 +81,6 @@ class RemoteDataSource @Inject constructor(
         })
     }
 
-    interface loadAllSurahCallback{
-        fun onResponseReceived(res:List<SurahResponseItem>)
-    }
     interface loadAllAyatCallback{
         fun onResponseReceived(res:List<AyatResponseItem>)
     }
