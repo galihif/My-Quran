@@ -22,6 +22,7 @@ fun MyQuranApp() {
         composable(Screen.Welcome.route) {
             WelcomeScreen(
                 onStartedClick = {
+                    navController.popBackStack()
                     navController.navigate(Screen.Home.route)
                 }
             )
