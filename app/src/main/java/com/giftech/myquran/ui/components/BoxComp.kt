@@ -19,6 +19,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.giftech.myquran.R
+import com.giftech.myquran.data.model.Surah
 
 @Composable
 fun BoxLastRead(
@@ -75,7 +76,7 @@ fun BoxLastRead(
 }
 
 @Composable
-fun BoxSurahHeader() {
+fun BoxSurahHeader(surah: Surah) {
     Box(
         Modifier
             .fillMaxWidth()
@@ -94,13 +95,13 @@ fun BoxSurahHeader() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                "{Surah Name}",
+                surah.nama,
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Medium,
                 color = Color.White
             )
             Text(
-                "{Surah Arti}",
+                surah.arti,
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Medium,
                 color = Color.White
@@ -113,7 +114,7 @@ fun BoxSurahHeader() {
                 color = Color.White
             )
             Text(
-                "{type} - {2} ayat".uppercase(),
+                "${surah.type} - ${surah.jumlahAyat} ayat".uppercase(),
                 fontSize = 14.sp,
                 fontWeight = FontWeight.Medium,
                 color = Color.White
