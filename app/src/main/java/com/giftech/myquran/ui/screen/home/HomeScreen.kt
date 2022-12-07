@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.giftech.myquran.R
 import com.giftech.myquran.data.Resource
-import com.giftech.myquran.data.source.local.entity.SurahEntity
+import com.giftech.myquran.data.model.Surah
 import com.giftech.myquran.ui.components.BoxLastRead
 import com.giftech.myquran.ui.components.TextTitle
 import com.giftech.myquran.ui.theme.Gray500
@@ -35,7 +35,6 @@ fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     Scaffold {
-        val itemList = (0..10).map { it.toString() }
         viewModel.listSurah.collectAsState().value.let {
             when(it){
                 is Resource.Error -> {
@@ -55,7 +54,7 @@ fun HomeScreen(
 }
 
 @Composable
-fun HomeContent(listSurah:List<SurahEntity>) {
+fun HomeContent(listSurah:List<Surah>) {
     LazyColumn(
         Modifier
             .fillMaxWidth(),
@@ -98,7 +97,7 @@ fun HomeContent(listSurah:List<SurahEntity>) {
 }
 
 @Composable
-fun SurahItem(surah: SurahEntity) {
+fun SurahItem(surah: Surah) {
     Row(
         Modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically
@@ -113,16 +112,16 @@ fun SurahItem(surah: SurahEntity) {
         Spacer(Modifier.width(8.dp))
         Column(Modifier.weight(1f)) {
             Text(
-                text = "Surah Name",
+                text = surah.nama,
                 color = MaterialTheme.colors.primary
             )
             Text(
-                text = "Mekah {2} ayat",
+                text = "Mekah ${surah.jumlahAyat} ayat",
                 color = Gray500
             )
         }
         Text(
-            text = " البقرة",
+            text = surah.asma,
             color = MaterialTheme.colors.primary,
             fontFamily = FontFamily(Font(R.font.amiri_bold)),
             fontSize = 22.sp
