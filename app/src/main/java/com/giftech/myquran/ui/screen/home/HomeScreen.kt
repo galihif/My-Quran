@@ -15,8 +15,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -28,6 +26,7 @@ import com.giftech.myquran.ui.components.BoxLastRead
 import com.giftech.myquran.ui.components.TextTitle
 import com.giftech.myquran.ui.theme.Gray500
 import com.giftech.myquran.ui.theme.MyQuranTheme
+import com.giftech.myquran.ui.theme.fontsArab
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
@@ -123,7 +122,7 @@ fun SurahItem(surah: Surah) {
         Text(
             text = surah.asma,
             color = MaterialTheme.colors.primary,
-            fontFamily = FontFamily(Font(R.font.amiri_bold)),
+            fontFamily = fontsArab,
             fontSize = 22.sp
         )
     }

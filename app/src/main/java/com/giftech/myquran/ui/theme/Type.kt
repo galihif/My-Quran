@@ -17,6 +17,8 @@ val fonts = FontFamily(
     Font(R.font.poppins_bold, FontWeight.Bold),
 )
 
+val fontsArab = FontFamily(Font(R.font.amiri_bold))
+
 val Typography = Typography(
     defaultFontFamily = fonts,
     body1 = TextStyle(
