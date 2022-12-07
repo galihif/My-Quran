@@ -1,31 +1,49 @@
 package com.giftech.myquran.ui
 
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.giftech.myquran.ui.navigation.Screen
 import com.giftech.myquran.ui.screen.home.HomeScreen
+import com.giftech.myquran.ui.screen.surah.SurahScreen
 import com.giftech.myquran.ui.screen.welcome.WelcomeScreen
 
 @Composable
 fun MyQuranApp() {
     val navController = rememberNavController()
-//    val navBackStackEntry by navController.currentBackStackEntryAsState()
 
     NavHost(
         navController = navController,
         startDestination = Screen.Welcome.route
     ) {
-        composable(Screen.Welcome.route){
+        composable(Screen.Welcome.route) {
             WelcomeScreen(
                 onStartedClick = {
                     navController.navigate(Screen.Home.route)
                 }
             )
         }
-        composable(Screen.Home.route){
-            HomeScreen()
+        composable(Screen.Home.route) {
+            HomeScreen(
+                onSurahClick = {
+                    navController.navigate(Screen.Surah.createRoute(it.nomor))
+                }
+            )
+        }
+        composable(
+            route = Screen.Surah.route,
+            arguments = listOf(navArgument("nomorSurah") { type = NavType.IntType }),
+        ) {
+            val nomorSurah = it.arguments?.getInt("nomorSurah") ?: 1
+            SurahScreen(
+                nomorSurah = nomorSurah,
+                onBack = {
+                    navController.popBackStack()
+                }
+            )
         }
     }
 }
