@@ -11,6 +11,7 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -44,6 +45,10 @@ fun HomeScreen(
     val lastRead = remember {
         viewModel.lastRead
     }.collectAsState()
+
+    LaunchedEffect(Unit){
+        viewModel.getLastRead()
+    }
 
     Scaffold {
         listSurah.value.let {
