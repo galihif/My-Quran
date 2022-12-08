@@ -4,8 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.giftech.myquran.data.MainRepository
 import com.giftech.myquran.data.Resource
+import com.giftech.myquran.data.model.LastRead
 import com.giftech.myquran.data.model.Surah
-import com.giftech.myquran.data.source.local.entity.SurahEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -18,7 +18,6 @@ class HomeViewModel
 @Inject constructor(
     private val repository: MainRepository
 ) : ViewModel() {
-    fun test() = repository.test()
 
     private val _listSurah:MutableStateFlow<Resource<List<Surah>>> =MutableStateFlow(Resource.Loading())
     val listSurah:StateFlow<Resource<List<Surah>>> = _listSurah
@@ -34,7 +33,18 @@ class HomeViewModel
         }
     }
 
+    private val _lastRead:MutableStateFlow<LastRead> = MutableStateFlow(LastRead())
+    val lastRead:StateFlow<LastRead> = _lastRead
+
+    private fun getLastReadd(){
+        viewModelScope.launch {
+            repository.getLastRead().collect{
+                _lastRead.value = it
+            }
+        }
+    }
     init {
         getListSurah()
+        getLastReadd()
     }
 }
