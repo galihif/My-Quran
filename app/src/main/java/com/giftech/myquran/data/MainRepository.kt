@@ -2,6 +2,7 @@ package com.giftech.myquran.data
 
 import com.giftech.myquran.data.model.LastRead
 import com.giftech.myquran.data.model.Surah
+import com.giftech.myquran.data.model.toEntity
 import com.giftech.myquran.data.source.local.LocalDataSource
 import com.giftech.myquran.data.source.local.entity.toModel
 import com.giftech.myquran.data.source.remote.RemoteDataSource
@@ -31,4 +32,8 @@ class MainRepository @Inject constructor(
         flowOf(
             local.getLastAyat().toModel()
         )
+
+    fun setLastRead(lastRead: LastRead){
+        local.setLastAyat(lastRead.toEntity())
+    }
 }
