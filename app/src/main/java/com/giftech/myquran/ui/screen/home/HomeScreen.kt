@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.giftech.myquran.R
 import com.giftech.myquran.data.Resource
+import com.giftech.myquran.data.model.LastRead
 import com.giftech.myquran.data.model.Surah
 import com.giftech.myquran.ui.components.BoxLastRead
 import com.giftech.myquran.ui.components.TextTitle
@@ -48,6 +49,7 @@ fun HomeScreen(
                     if (it.data != null) {
                         HomeContent(
                             listSurah = it.data,
+                            lastRead = viewModel.lastRead.collectAsState().value,
                             onSurahClicked = onSurahClick
                         )
                     }
@@ -60,6 +62,7 @@ fun HomeScreen(
 @Composable
 fun HomeContent(
     listSurah: List<Surah>,
+    lastRead:LastRead,
     onSurahClicked: (Surah) -> Unit
 ) {
     LazyColumn(
@@ -85,8 +88,8 @@ fun HomeContent(
                     fontSize = 18.sp
                 )
                 BoxLastRead(
-                    surah = "Al Baqarah",
-                    ayat = 8,
+                    surah = lastRead.namaSurah,
+                    ayat = lastRead.nomorAyat,
                     onClick = {}
                 )
                 TextTitle(
