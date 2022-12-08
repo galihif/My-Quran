@@ -36,7 +36,7 @@ class HomeViewModel
     private val _lastRead:MutableStateFlow<LastRead> = MutableStateFlow(LastRead())
     val lastRead:StateFlow<LastRead> = _lastRead
 
-    private fun getLastReadd(){
+    private fun getLastRead(){
         viewModelScope.launch {
             repository.getLastRead().collect{
                 _lastRead.value = it
@@ -45,6 +45,6 @@ class HomeViewModel
     }
     init {
         getListSurah()
-        getLastReadd()
+        getLastRead()
     }
 }
