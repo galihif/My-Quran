@@ -5,8 +5,9 @@ import com.giftech.myquran.data.source.local.entity.LastReadAyatEntity
 import com.giftech.myquran.data.source.local.entity.SurahEntity
 import com.giftech.myquran.data.source.local.preferences.Preferences
 import com.giftech.myquran.data.source.local.room.SurahDao
+import javax.inject.Inject
 
-class LocalDataSource private constructor(
+class LocalDataSource @Inject constructor(
     private val surahDao: SurahDao,
     private val preferences: Preferences
 ){
