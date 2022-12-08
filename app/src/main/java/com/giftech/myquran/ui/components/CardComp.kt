@@ -39,10 +39,9 @@ fun CardNomorAyat(nomor: Int) {
 @Composable
 fun CardAyatHeader(
     nomor: Int,
+    isSaved:Boolean,
+    onSaveClick:()->Unit
 ) {
-    var isSaved by remember {
-        mutableStateOf(false)
-    }
     Card(
         shape = RoundedCornerShape(8.dp),
         backgroundColor = Purple100,
@@ -56,7 +55,7 @@ fun CardAyatHeader(
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             CardNomorAyat(nomor)
-            IconButton(onClick = { isSaved = !isSaved }) {
+            IconButton(onClick = onSaveClick) {
                 Crossfade(targetState = isSaved) {
                     Icon(
                         imageVector =  if(it) Icons.Filled.Bookmark else Icons.TwoTone.Bookmark,
