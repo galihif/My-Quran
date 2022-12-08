@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.giftech.myquran.data.Resource
 import com.giftech.myquran.data.model.Ayat
+import com.giftech.myquran.data.model.LastRead
 import com.giftech.myquran.data.model.Surah
 import com.giftech.myquran.ui.components.BoxSurahHeader
 import com.giftech.myquran.ui.components.CardAyatHeader
@@ -31,13 +32,13 @@ fun SurahScreen(
     nomorSurah: Int = 1,
     onBack: () -> Unit
 ) {
-    val namaSurah = remember{
+    val namaSurah = remember {
         viewModel.namaSurah
     }.collectAsState()
-    val surah = remember{
+    val surah = remember {
         viewModel.surah
     }.collectAsState()
-    var isLastRead by remember {
+    var isLastReadSurah by remember {
         mutableStateOf(false)
     }
     val lastRead = remember {
@@ -47,8 +48,8 @@ fun SurahScreen(
     val listState = rememberLazyListState()
     val coroutineScope = rememberCoroutineScope()
 
-    LaunchedEffect(isLastRead){
-        if (isLastRead){
+    LaunchedEffect(isLastReadSurah) {
+        if (isLastReadSurah) {
             coroutineScope.launch {
                 listState.animateScrollToItem(lastRead.value.nomorAyat)
             }
@@ -69,14 +70,25 @@ fun SurahScreen(
                 is Resource.Error -> {}
                 is Resource.Loading -> {}
                 is Resource.Success -> {
-                    val data = it.data
-                    if (data != null) {
+                    val surahRes = it.data
+                    if (surahRes != null) {
                         SurahContent(
                             listState,
-                            data
+                            surah = surahRes,
+                            onSavedClick = { nomorAyat ->
+                                viewModel.setLastRead(
+                                    LastRead(
+                                        nomorAyat = nomorAyat,
+                                        nomorSurah = nomorSurah,
+                                        namaSurah = namaSurah.value
+                                    )
+                                )
+                            },
+                            lastRead = lastRead.value,
+                            isLastReadSurah = isLastReadSurah
                         )
-                        isLastRead = data.nomor == lastRead.value.nomorSurah
-                        viewModel.setNamaSurah(data.nama)
+                        isLastReadSurah = surahRes.nomor == lastRead.value.nomorSurah
+                        viewModel.setNamaSurah(surahRes.nama)
                     }
                 }
             }
@@ -86,8 +98,11 @@ fun SurahScreen(
 
 @Composable
 fun SurahContent(
-    listState:LazyListState,
+    listState: LazyListState,
     surah: Surah,
+    lastRead: LastRead,
+    isLastReadSurah: Boolean,
+    onSavedClick: (Int) -> Unit
 ) {
     LazyColumn(
         state = listState,
@@ -101,15 +116,27 @@ fun SurahContent(
             Spacer(Modifier.height(16.dp))
         }
         items(surah.listAyat!!) {
-            AyatItem(it)
+            AyatItem(
+                it,
+                isLastReadSurah && lastRead.nomorAyat == it.nomor,
+                onSavedClick = { nomorAyat ->  onSavedClick(nomorAyat) }
+            )
         }
     }
 }
 
 @Composable
-fun AyatItem(ayat: Ayat) {
+fun AyatItem(
+    ayat: Ayat,
+    isSaved: Boolean,
+    onSavedClick: (Int) -> Unit
+) {
     Column(Modifier.fillMaxWidth()) {
-        CardAyatHeader(ayat.nomor)
+        CardAyatHeader(
+            ayat.nomor,
+            isSaved,
+            onSaveClick = { onSavedClick(ayat.nomor) }
+        )
         Column(
             Modifier
                 .fillMaxWidth()
@@ -136,6 +163,6 @@ fun AyatItem(ayat: Ayat) {
 @Composable
 fun SurahScreenPreview() {
     MyQuranTheme {
-        SurahScreen() {}
+        SurahScreen {}
     }
 }
