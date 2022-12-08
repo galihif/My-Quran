@@ -58,6 +58,11 @@ class SurahViewModel
         }
     }
 
+    fun setLastRead(lastRead: LastRead){
+        repository.setLastRead(lastRead)
+        getLastRead()
+    }
+
     init {
         getLastRead()
     }
