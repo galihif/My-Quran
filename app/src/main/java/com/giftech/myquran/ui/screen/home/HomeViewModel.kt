@@ -36,7 +36,7 @@ class HomeViewModel
     private val _lastRead:MutableStateFlow<LastRead> = MutableStateFlow(LastRead())
     val lastRead:StateFlow<LastRead> = _lastRead
 
-    private fun getLastRead(){
+    fun getLastRead(){
         viewModelScope.launch {
             repository.getLastRead().collect{
                 _lastRead.value = it
