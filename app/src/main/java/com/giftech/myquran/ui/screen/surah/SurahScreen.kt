@@ -3,10 +3,11 @@ package com.giftech.myquran.ui.screen.surah
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
@@ -21,6 +22,7 @@ import com.giftech.myquran.ui.components.BoxSurahHeader
 import com.giftech.myquran.ui.components.CardAyatHeader
 import com.giftech.myquran.ui.components.TitleBar
 import com.giftech.myquran.ui.theme.*
+import kotlinx.coroutines.launch
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
@@ -29,23 +31,51 @@ fun SurahScreen(
     nomorSurah: Int = 1,
     onBack: () -> Unit
 ) {
+    val namaSurah = remember{
+        viewModel.namaSurah
+    }.collectAsState()
+    val surah = remember{
+        viewModel.surah
+    }.collectAsState()
+    var isLastRead by remember {
+        mutableStateOf(false)
+    }
+    val lastRead = remember {
+        viewModel.lastRead
+    }.collectAsState()
+
+    val listState = rememberLazyListState()
+    val coroutineScope = rememberCoroutineScope()
+
+    LaunchedEffect(isLastRead){
+        if (isLastRead){
+            coroutineScope.launch {
+                listState.animateScrollToItem(lastRead.value.nomorAyat)
+            }
+        }
+    }
+
     Scaffold(
         topBar = {
             TitleBar(
-                title = viewModel.namaSurah.collectAsState().value,
+                title = namaSurah.value,
                 onBack = onBack
             )
         }
     ) {
         viewModel.setNomorSurah(nomorSurah)
-        viewModel.surah.collectAsState().value.let {
+        surah.value.let {
             when (it) {
                 is Resource.Error -> {}
                 is Resource.Loading -> {}
                 is Resource.Success -> {
                     val data = it.data
                     if (data != null) {
-                        SurahContent(data)
+                        SurahContent(
+                            listState,
+                            data
+                        )
+                        isLastRead = data.nomor == lastRead.value.nomorSurah
                         viewModel.setNamaSurah(data.nama)
                     }
                 }
@@ -56,9 +86,11 @@ fun SurahScreen(
 
 @Composable
 fun SurahContent(
-    surah: Surah
+    listState:LazyListState,
+    surah: Surah,
 ) {
     LazyColumn(
+        state = listState,
         contentPadding = PaddingValues(16.dp),
         verticalArrangement = Arrangement.spacedBy(4.dp)
     ) {
