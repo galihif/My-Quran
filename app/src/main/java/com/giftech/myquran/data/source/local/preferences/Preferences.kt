@@ -50,9 +50,9 @@ class Preferences(val context: Context) {
 
     fun getAyat():LastReadAyatEntity{
         val ayat = LastReadAyatEntity()
-        ayat.nomorAyat = preferences.getInt(NOMOR_AYAT, 0)
-        ayat.nomorSurah = preferences.getInt(NOMOR_SURAH,0)
-        ayat.namaSurah = preferences.getString(NAMA_SURAH,"")!!
+        ayat.nomorAyat = preferences.getInt(NOMOR_AYAT, 1)
+        ayat.nomorSurah = preferences.getInt(NOMOR_SURAH,1)
+        ayat.namaSurah = preferences.getString(NAMA_SURAH,"Al-Fatihah")!!
         return ayat
     }
 
