@@ -30,7 +30,7 @@ fun MyQuranApp() {
         composable(Screen.Home.route) {
             HomeScreen(
                 onSurahClick = {
-                    navController.navigate(Screen.Surah.createRoute(it.nomor))
+                    navController.navigate(Screen.Surah.createRoute(it))
                 }
             )
         }

@@ -35,7 +35,7 @@ import com.giftech.myquran.ui.theme.fontsArab
 @Composable
 fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel(),
-    onSurahClick: (Surah) -> Unit
+    onSurahClick: (Int) -> Unit
 ) {
     val listSurah = remember {
         viewModel.listSurah
@@ -71,7 +71,7 @@ fun HomeScreen(
 fun HomeContent(
     listSurah: List<Surah>,
     lastRead:LastRead,
-    onSurahClicked: (Surah) -> Unit
+    onSurahClicked: (Int) -> Unit
 ) {
     LazyColumn(
         Modifier
@@ -120,12 +120,12 @@ fun HomeContent(
 @Composable
 fun SurahItem(
     surah: Surah,
-    onSurahClicked: (Surah) -> Unit
+    onSurahClicked: (Int) -> Unit
 ) {
     Row(
         Modifier
             .fillMaxWidth()
-            .clickable { onSurahClicked(surah) },
+            .clickable { onSurahClicked(surah.nomor) },
         verticalAlignment = Alignment.CenterVertically
     ) {
         Box(Modifier.wrapContentSize()) {
