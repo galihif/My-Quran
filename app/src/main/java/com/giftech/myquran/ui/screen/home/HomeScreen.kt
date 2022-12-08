@@ -36,7 +36,7 @@ import com.giftech.myquran.ui.theme.fontsArab
 fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel(),
     onSurahClick: (Int) -> Unit = {},
-    onLastReadClick:(Int) -> Unit = {}
+    onLastReadClick: (Int) -> Unit = {}
 ) {
     val listSurah = remember {
         viewModel.listSurah
@@ -74,7 +74,7 @@ fun HomeScreen(
 @Composable
 fun HomeContent(
     listSurah: List<Surah>,
-    lastRead:LastRead,
+    lastRead: LastRead,
     onSurahClicked: (Int) -> Unit,
     onLastReadClick: () -> Unit
 ) {
@@ -164,6 +164,6 @@ fun SurahItem(
 @Composable
 fun HomePreview() {
     MyQuranTheme {
-        HomeScreen() {}
+        HomeScreen {}
     }
 }
