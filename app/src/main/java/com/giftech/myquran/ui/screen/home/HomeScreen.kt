@@ -12,6 +12,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -36,8 +37,15 @@ fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel(),
     onSurahClick: (Surah) -> Unit
 ) {
+    val listSurah = remember {
+        viewModel.listSurah
+    }.collectAsState()
+    val lastRead = remember {
+        viewModel.lastRead
+    }.collectAsState()
+
     Scaffold {
-        viewModel.listSurah.collectAsState().value.let {
+        listSurah.value.let {
             when (it) {
                 is Resource.Error -> {
                     Log.d("TAG", "HomeScreen: ${it.message}")
@@ -49,7 +57,7 @@ fun HomeScreen(
                     if (it.data != null) {
                         HomeContent(
                             listSurah = it.data,
-                            lastRead = viewModel.lastRead.collectAsState().value,
+                            lastRead = lastRead.value,
                             onSurahClicked = onSurahClick
                         )
                     }
