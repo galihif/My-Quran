@@ -31,6 +31,9 @@ fun MyQuranApp() {
             HomeScreen(
                 onSurahClick = {
                     navController.navigate(Screen.Surah.createRoute(it))
+                },
+                onLastReadClick = {
+                    navController.navigate(Screen.Surah.createRoute(it))
                 }
             )
         }
