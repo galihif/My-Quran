@@ -47,8 +47,8 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideLocal(dao:SurahDao, pref:Preferences):LocalDataSource  =
-        LocalDataSource(dao,pref)
+    fun provideLocal(dao:SurahDao, pref:Preferences, db:SurahDatabase):LocalDataSource  =
+        LocalDataSource(dao,pref,db)
 
 
     @Provides
