@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.giftech.myquran.R
-import com.giftech.myquran.data.Resource
+import com.giftech.myquran.utils.Resource
 import com.giftech.myquran.data.model.LastRead
 import com.giftech.myquran.data.model.Surah
 import com.giftech.myquran.ui.components.BoxLastRead

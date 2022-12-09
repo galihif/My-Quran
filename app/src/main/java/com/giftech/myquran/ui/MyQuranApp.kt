@@ -1,6 +1,7 @@
 package com.giftech.myquran.ui
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -12,6 +13,7 @@ import com.giftech.myquran.ui.screen.search.SearchScreen
 import com.giftech.myquran.ui.screen.surah.SurahScreen
 import com.giftech.myquran.ui.screen.welcome.WelcomeScreen
 
+@ExperimentalComposeUiApi
 @Composable
 fun MyQuranApp() {
     val navController = rememberNavController()

@@ -15,7 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.giftech.myquran.data.Resource
+import com.giftech.myquran.utils.Resource
 import com.giftech.myquran.data.model.Ayat
 import com.giftech.myquran.data.model.LastRead
 import com.giftech.myquran.data.model.Surah

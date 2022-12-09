@@ -8,6 +8,7 @@ import com.giftech.myquran.data.source.local.entity.toModel
 import com.giftech.myquran.data.source.remote.RemoteDataSource
 import com.giftech.myquran.data.source.remote.dto.toEntity
 import com.giftech.myquran.data.source.remote.dto.toModel
+import com.giftech.myquran.utils.Resource
 import com.giftech.myquran.utils.networkBoundResource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

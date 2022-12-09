@@ -1,6 +1,5 @@
 package com.giftech.myquran.utils
 
-import com.giftech.myquran.data.Resource
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.channelFlow

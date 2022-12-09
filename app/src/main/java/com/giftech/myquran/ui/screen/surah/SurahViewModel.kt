@@ -3,7 +3,7 @@ package com.giftech.myquran.ui.screen.surah
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.giftech.myquran.data.MainRepository
-import com.giftech.myquran.data.Resource
+import com.giftech.myquran.utils.Resource
 import com.giftech.myquran.data.model.LastRead
 import com.giftech.myquran.data.model.Surah
 import dagger.hilt.android.lifecycle.HiltViewModel
