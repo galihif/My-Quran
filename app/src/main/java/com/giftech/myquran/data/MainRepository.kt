@@ -19,6 +19,15 @@ class MainRepository @Inject constructor(
     private val remote: RemoteDataSource
 ) {
 
+    fun getSearchResult(keyword:String):Flow<List<Surah>> =
+        flow{
+            local.getSurahByName(keyword)
+                .collect{
+                    emit(it.map { entity -> entity.toModel() })
+                }
+        }
+
+
     fun getListSurah(): Flow<Resource<List<Surah>>> =
         networkBoundResource(
             query = {
