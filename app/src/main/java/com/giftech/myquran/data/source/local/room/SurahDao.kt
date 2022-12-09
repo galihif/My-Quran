@@ -21,7 +21,7 @@ interface SurahDao {
     suspend fun insertSurah(listSurah: List<SurahEntity>)
 
     @Query("SELECT * FROM surah WHERE nama LIKE '%' || :keyword || '%'")
-    fun getSurahByName(keyword:String):LiveData<List<SurahEntity>>
+    fun getSurahByName(keyword:String):Flow<List<SurahEntity>>
 
     @Query("DELETE FROM surah")
     suspend fun deleteAllSurah()
