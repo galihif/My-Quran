@@ -7,6 +7,7 @@ import com.giftech.myquran.data.source.local.entity.SurahEntity
 import com.giftech.myquran.data.source.local.preferences.Preferences
 import com.giftech.myquran.data.source.local.room.SurahDao
 import com.giftech.myquran.data.source.local.room.SurahDatabase
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class LocalDataSource @Inject constructor(
@@ -34,7 +35,7 @@ class LocalDataSource @Inject constructor(
         }
     }
 
-    fun getSurahByName(keyword:String):LiveData<List<SurahEntity>> = surahDao.getSurahByName(keyword)
+    fun getSurahByName(keyword:String): Flow<List<SurahEntity>> = surahDao.getSurahByName(keyword)
 
     fun setLastSurah(surah:SurahEntity){
         preferences.setSurah(surah)
