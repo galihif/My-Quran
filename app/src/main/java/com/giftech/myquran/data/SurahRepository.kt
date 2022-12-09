@@ -72,7 +72,7 @@ class SurahRepository private constructor(
 
             override fun saveCallResult(data: List<SurahResponseItem>) {
                 val listSurah = DataMapper.mapListSurahResponseToEntity(data)
-                localDataSource.insertSurah(listSurah)
+//                localDataSource.insertSurah(listSurah)
             }
 
         }.asLiveData()
