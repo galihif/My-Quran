@@ -29,15 +29,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.search.SearchActivity"
-            android:windowSoftInputMode="stateVisible" />
-        <activity android:name=".ui.surah.SurahActivity" />
-        <activity android:name=".ui.home.HomeActivity" />
-        <activity
-            android:name=".ui.splash.SplashActivity"
-            android:exported="false"/>
-
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
