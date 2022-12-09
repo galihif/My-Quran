@@ -23,6 +23,6 @@ object Injection {
         val dao = database.surahDao()
         val preferences = Preferences.getInstance(context)
 
-        return LocalDataSource.getInstance(dao, preferences)
+        return LocalDataSource.getInstance(dao, preferences,database)
     }
 }
