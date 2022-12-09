@@ -25,9 +25,9 @@ class SearchActivity : AppCompatActivity() {
 
         binding.etSearch.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                viewmodel.getSurahByName(s.toString()).observe(this@SearchActivity, {res ->
-                    adapter.setList(res)
-                })
+//                viewmodel.getSurahByName(s.toString()).observe(this@SearchActivity, {res ->
+//                    adapter.setList(res)
+//                })
             }
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }

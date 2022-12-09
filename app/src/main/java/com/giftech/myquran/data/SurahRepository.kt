@@ -77,9 +77,9 @@ class SurahRepository private constructor(
 
         }.asLiveData()
 
-    override fun getSurahByName(keyword: String): LiveData<List<SurahEntity>> {
-        return localDataSource.getSurahByName(keyword)
-    }
+//    override fun getSurahByName(keyword: String): LiveData<List<SurahEntity>> {
+//        return localDataSource.getSurahByName(keyword)
+//    }
 
     override fun getAyatByNomorSurah(nomorSurah: Int): LiveData<List<AyatEntity>> {
         val listAyat = MutableLiveData<List<AyatEntity>>()

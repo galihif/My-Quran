@@ -7,7 +7,7 @@ import com.giftech.myquran.data.source.local.entity.LastReadAyatEntity
 
 class SearchViewModel(private val surahRepository: SurahRepository):ViewModel() {
 
-    fun getSurahByName(keyword:String) = surahRepository.getSurahByName(keyword)
+//    fun getSurahByName(keyword:String) = surahRepository.getSurahByName(keyword)
 
     fun getLastRead(): LiveData<LastReadAyatEntity> = surahRepository.getLastRead()
 
