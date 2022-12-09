@@ -2,6 +2,7 @@ package com.giftech.myquran.data.source.remote.dto
 
 
 import com.giftech.myquran.data.model.Surah
+import com.giftech.myquran.data.source.local.entity.SurahEntity
 import com.google.gson.annotations.SerializedName
 
 class SurahDto(
@@ -33,4 +34,15 @@ fun SurahDto.toModel():Surah =
         arti = arti,
         audio = audio,
         desc = deskripsi
+    )
+
+fun SurahDto.toEntity():SurahEntity =
+    SurahEntity(
+        nomor = nomor,
+        asma = nama,
+        nama = namaLatin,
+        ayat = jumlahAyat,
+        type = tempatTurun,
+        arti = arti,
+        audio = audio,
     )
