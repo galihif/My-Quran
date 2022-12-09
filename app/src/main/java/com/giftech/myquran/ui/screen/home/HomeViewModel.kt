@@ -9,7 +9,6 @@ import com.giftech.myquran.data.model.Surah
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -19,17 +18,14 @@ class HomeViewModel
     private val repository: MainRepository
 ) : ViewModel() {
 
-    private val _listSurah:MutableStateFlow<Resource<List<Surah>>> =MutableStateFlow(Resource.Loading())
+    private val _listSurah:MutableStateFlow<Resource<List<Surah>>> = MutableStateFlow(Resource.Loading())
     val listSurah:StateFlow<Resource<List<Surah>>> = _listSurah
 
     private fun getListSurah(){
         viewModelScope.launch {
-            repository.getListSurah()
-                .catch {
-                    _listSurah.value = Resource.Error(it.message.toString())
-                }.collect{
-                    _listSurah.value = Resource.Success(it)
-                }
+            repository.getListSurah().collect{
+                _listSurah.value = it
+            }
         }
     }
 
