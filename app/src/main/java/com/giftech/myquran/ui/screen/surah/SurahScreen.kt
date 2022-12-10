@@ -70,7 +70,8 @@ fun SurahScreen(
                 onBack = {
                     onBack()
                     viewModel.stopAudio()
-                }
+                },
+                isVisible = isAudioPlayed.value
             )
         }
     ) {
