@@ -15,7 +15,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.giftech.myquran.utils.Resource
 import com.giftech.myquran.data.model.Ayat
 import com.giftech.myquran.data.model.LastRead
 import com.giftech.myquran.data.model.Surah
@@ -23,6 +22,7 @@ import com.giftech.myquran.ui.components.BoxSurahHeader
 import com.giftech.myquran.ui.components.CardAyatHeader
 import com.giftech.myquran.ui.components.TitleBar
 import com.giftech.myquran.ui.theme.*
+import com.giftech.myquran.utils.Resource
 import kotlinx.coroutines.launch
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -56,11 +56,21 @@ fun SurahScreen(
         }
     }
 
+    val isAudioStarted = remember {
+        viewModel.isAudioStarted
+    }
+    val isAudioPlayed = remember {
+        viewModel.isAudioPlayed
+    }
+
     Scaffold(
         topBar = {
             TitleBar(
                 title = namaSurah.value,
-                onBack = onBack
+                onBack = {
+                    onBack()
+                    viewModel.stopAudio()
+                }
             )
         }
     ) {
@@ -85,7 +95,17 @@ fun SurahScreen(
                                 )
                             },
                             lastRead = lastRead.value,
-                            isLastReadSurah = isLastReadSurah
+                            isLastReadSurah = isLastReadSurah,
+                            isPlayed = isAudioPlayed.value,
+                            onClickPlay = {
+                                isAudioPlayed.value = !isAudioPlayed.value
+                                if (!isAudioStarted.value){
+                                    isAudioStarted.value = true
+                                    viewModel.playAudio(surahRes.audio)
+                                } else{
+                                    viewModel.resumeOrPauseAudio()
+                                }
+                            }
                         )
                         isLastReadSurah = surahRes.nomor == lastRead.value.nomorSurah
                         viewModel.setNamaSurah(surahRes.nama)
@@ -102,7 +122,9 @@ fun SurahContent(
     surah: Surah,
     lastRead: LastRead,
     isLastReadSurah: Boolean,
-    onSavedClick: (Int) -> Unit
+    onSavedClick: (Int) -> Unit,
+    isPlayed:Boolean,
+    onClickPlay:()->Unit
 ) {
     LazyColumn(
         state = listState,
@@ -110,7 +132,11 @@ fun SurahContent(
         verticalArrangement = Arrangement.spacedBy(4.dp)
     ) {
         item {
-            BoxSurahHeader(surah)
+            BoxSurahHeader(
+                surah,
+                isPlayed,
+                onClickPlay
+            )
         }
         item {
             Spacer(Modifier.height(16.dp))
