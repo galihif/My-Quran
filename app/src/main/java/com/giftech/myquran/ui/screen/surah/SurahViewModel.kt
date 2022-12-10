@@ -1,11 +1,14 @@
 package com.giftech.myquran.ui.screen.surah
 
+import android.media.AudioManager
+import android.media.MediaPlayer
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.giftech.myquran.data.MainRepository
-import com.giftech.myquran.utils.Resource
 import com.giftech.myquran.data.model.LastRead
 import com.giftech.myquran.data.model.Surah
+import com.giftech.myquran.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -61,6 +64,56 @@ class SurahViewModel
     fun setLastRead(lastRead: LastRead){
         repository.setLastRead(lastRead)
         getLastRead()
+    }
+
+    private var mediaPlayer = MediaPlayer()
+    private var length = 0
+    var isAudioStarted = mutableStateOf(false)
+    var isAudioPlayed = mutableStateOf(false)
+
+    fun playAudio(audio:String){
+        // on below line we are setting audio stream type as
+        // stream music on below line.
+        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC)
+
+        // on below line we are running a try and catch block
+        // for our media player.
+        try {
+            // on below line we are setting audio source
+            // as audio url on below line.
+            mediaPlayer.setDataSource(audio)
+
+            // on below line we are preparing
+            // our media player.
+            mediaPlayer.prepare()
+
+            // on below line we are starting
+            // our media player.
+            mediaPlayer.start()
+
+        } catch (e: Exception) {
+
+            // on below line we are
+            // handling our exception.
+            e.printStackTrace()
+        }
+    }
+
+    fun resumeOrPauseAudio(){
+        // if media player is playing.
+        if (mediaPlayer.isPlaying) {
+            // if media player is playing
+            // we are stopping it on below line.
+            mediaPlayer.pause()
+            length = mediaPlayer.currentPosition
+        } else{
+            mediaPlayer.seekTo(length)
+            mediaPlayer.start()
+        }
+    }
+
+    fun stopAudio(){
+        mediaPlayer.stop()
     }
 
     init {
