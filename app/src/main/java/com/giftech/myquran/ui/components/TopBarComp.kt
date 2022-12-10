@@ -1,9 +1,17 @@
+@file:OptIn(ExperimentalAnimationApi::class)
+
 package com.giftech.myquran.ui.components
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.scaleIn
+import androidx.compose.animation.scaleOut
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.rounded.VolumeUp
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
@@ -22,11 +30,32 @@ import com.giftech.myquran.R
 @Composable
 fun TitleBar(
     title: String,
+    isVisible: Boolean = false,
     onBack: () -> Unit
 ) {
     TopAppBar(
         title = {
-            TextTitle(text = title, fontSize = 16.sp)
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                TextTitle(text = title, fontSize = 16.sp)
+                AnimatedVisibility(
+                    visible = isVisible,
+                    enter = scaleIn(spring()),
+                    exit = scaleOut(spring()),
+                ) {
+                    Icon(
+                        imageVector = Icons.Rounded.VolumeUp,
+                        contentDescription = "",
+                        tint = MaterialTheme.colors.primary,
+                        modifier = Modifier.padding(horizontal = 8.dp)
+                    )
+                }
+            }
         },
         navigationIcon = {
             IconButton(onClick = onBack) {
