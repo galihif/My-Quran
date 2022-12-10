@@ -1,5 +1,7 @@
 package com.giftech.myquran.ui.components
 
+import androidx.compose.animation.Crossfade
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -76,7 +78,11 @@ fun BoxLastRead(
 }
 
 @Composable
-fun BoxSurahHeader(surah: Surah) {
+fun BoxSurahHeader(
+    surah: Surah,
+    isPlayed:Boolean,
+    onClickPlay:()->Unit
+) {
     Box(
         Modifier
             .fillMaxWidth()
@@ -125,11 +131,18 @@ fun BoxSurahHeader(surah: Surah) {
                 contentDescription ="",
             )
             Spacer(Modifier.height(8.dp))
-            IconButton(onClick = {}) {
-                Image(
-                    painterResource(R.drawable.ic_play),
-                    contentDescription =""
-                )
+            IconButton(onClick = onClickPlay) {
+                Crossfade(
+                    targetState = isPlayed,
+                    animationSpec = tween(500)
+                ) {
+                    Image(
+                        painterResource(
+                            if (it) R.drawable.ic_pause else R.drawable.ic_play
+                        ),
+                        contentDescription =""
+                    )
+                }
             }
         }
     }
