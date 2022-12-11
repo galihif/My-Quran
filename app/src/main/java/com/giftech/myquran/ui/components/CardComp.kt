@@ -8,14 +8,13 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Bookmark
 import androidx.compose.material.icons.twotone.Bookmark
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.giftech.myquran.ui.theme.Purple100
 
 @Composable
 fun CardNomorAyat(nomor: Int) {
@@ -44,7 +43,7 @@ fun CardAyatHeader(
 ) {
     Card(
         shape = RoundedCornerShape(8.dp),
-        backgroundColor = Purple100,
+        backgroundColor = MaterialTheme.colors.surface,
         elevation = 0.dp
     ) {
         Row(

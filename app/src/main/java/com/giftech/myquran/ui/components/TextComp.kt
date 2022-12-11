@@ -33,7 +33,7 @@ fun TextTitle(
     Text(
         text,
         modifier = modifier,
-        color = MaterialTheme.colors.primary,
+        color = MaterialTheme.colors.onBackground,
         fontWeight = FontWeight.Bold,
         fontSize = fontSize
     )

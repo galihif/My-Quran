@@ -3,6 +3,7 @@ package com.giftech.myquran.ui.screen.welcome
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -23,7 +24,9 @@ import com.giftech.myquran.ui.theme.MyQuranTheme
 fun WelcomeScreen(
     onStartedClick:()->Unit
 ) {
-    Surface {
+    Surface(
+        color =MaterialTheme.colors.background
+    ) {
         Column(
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Center,

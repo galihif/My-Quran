@@ -38,7 +38,7 @@ fun SurahItem(
         Column(Modifier.weight(1f)) {
             Text(
                 text = surah.nama,
-                color = MaterialTheme.colors.primary
+                color = MaterialTheme.colors.onBackground
             )
             Text(
                 text = "Mekah ${surah.jumlahAyat} ayat",

@@ -173,14 +173,14 @@ fun AyatItem(
                 ayat.arab,
                 Modifier.align(Alignment.End),
                 textAlign = TextAlign.End,
-                color = Purple900,
+                color = MaterialTheme.colors.onBackground,
                 fontFamily = fontsArab,
                 fontSize = 18.sp
             )
             Text(
                 ayat.arti,
                 fontSize = 16.sp,
-                color = Purple900,
+                color = Gray500
             )
         }
     }

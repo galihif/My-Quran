@@ -20,7 +20,6 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -65,7 +64,7 @@ fun TitleBar(
                 )
             }
         },
-        backgroundColor = Color.White
+        backgroundColor = MaterialTheme.colors.background
     )
 }
 
@@ -102,7 +101,7 @@ fun SearchBar(
             onValueChange = onValueChange,
             singleLine = true,
             colors = TextFieldDefaults.textFieldColors(
-                backgroundColor = MaterialTheme.colors.surface
+                backgroundColor = MaterialTheme.colors.background
             ),
             placeholder = {
                 Text(stringResource(R.string.search_surah))
