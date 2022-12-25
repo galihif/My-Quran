@@ -71,7 +71,7 @@ class SurahViewModel
     var isAudioStarted = mutableStateOf(false)
     var isAudioPlayed = mutableStateOf(false)
 
-    fun playAudio(audio:String){
+    fun prepareAudio(audio: String){
         // on below line we are setting audio stream type as
         // stream music on below line.
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC)
@@ -85,17 +85,22 @@ class SurahViewModel
 
             // on below line we are preparing
             // our media player.
-            mediaPlayer.prepare()
-
-            // on below line we are starting
-            // our media player.
-            mediaPlayer.start()
+            mediaPlayer.prepareAsync()
 
         } catch (e: Exception) {
 
             // on below line we are
             // handling our exception.
             e.printStackTrace()
+        }
+    }
+
+    fun playAudio(){
+        mediaPlayer.setOnPreparedListener {
+
+            // on below line we are starting
+            // our media player.
+            mediaPlayer.start()
         }
     }
 

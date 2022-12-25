@@ -102,7 +102,7 @@ fun SurahScreen(
                                 isAudioPlayed.value = !isAudioPlayed.value
                                 if (!isAudioStarted.value){
                                     isAudioStarted.value = true
-                                    viewModel.playAudio(surahRes.audio)
+                                    viewModel.playAudio()
                                 } else{
                                     viewModel.resumeOrPauseAudio()
                                 }
@@ -110,6 +110,7 @@ fun SurahScreen(
                         )
                         isLastReadSurah = surahRes.nomor == lastRead.value.nomorSurah
                         viewModel.setNamaSurah(surahRes.nama)
+                        viewModel.prepareAudio(surahRes.audio)
                     }
                 }
             }
