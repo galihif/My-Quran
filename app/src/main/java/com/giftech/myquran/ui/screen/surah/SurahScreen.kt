@@ -62,6 +62,10 @@ fun SurahScreen(
     val isAudioPlayed = remember {
         viewModel.isAudioPlayed
     }
+    val isAudioLoaded = remember {
+        viewModel.isAudioLoaded
+    }
+
 
     Scaffold(
         topBar = {
@@ -71,7 +75,8 @@ fun SurahScreen(
                     onBack()
                     viewModel.stopAudio()
                 },
-                isVisible = isAudioPlayed.value
+                isVisible = isAudioPlayed.value,
+                isLoaded = isAudioLoaded.value
             )
         }
     ) {

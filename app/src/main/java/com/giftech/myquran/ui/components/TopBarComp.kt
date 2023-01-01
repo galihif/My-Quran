@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Downloading
 import androidx.compose.material.icons.rounded.VolumeUp
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -30,6 +31,7 @@ import com.giftech.myquran.R
 fun TitleBar(
     title: String,
     isVisible: Boolean = false,
+    isLoaded:Boolean = false,
     onBack: () -> Unit
 ) {
     TopAppBar(
@@ -47,12 +49,21 @@ fun TitleBar(
                     enter = scaleIn(spring()),
                     exit = scaleOut(spring()),
                 ) {
-                    Icon(
-                        imageVector = Icons.Rounded.VolumeUp,
-                        contentDescription = "",
-                        tint = MaterialTheme.colors.primary,
-                        modifier = Modifier.padding(horizontal = 8.dp)
-                    )
+                    if (isLoaded){
+                        Icon(
+                            imageVector = Icons.Rounded.VolumeUp,
+                            contentDescription = "",
+                            tint = MaterialTheme.colors.primary,
+                            modifier = Modifier.padding(horizontal = 8.dp)
+                        )
+                    }else{
+                        Icon(
+                            imageVector = Icons.Default.Downloading,
+                            contentDescription = "",
+                            tint = MaterialTheme.colors.primary,
+                            modifier = Modifier.padding(horizontal = 8.dp)
+                        )
+                    }
                 }
             }
         },
