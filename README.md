@@ -2,6 +2,9 @@
 <img src="/images/my_quran.png"/>
 Quran reader with Indonesian translation and in-app murottal audio
 
+## Download
+This app is available on [Play Store](https://play.google.com/store/apps/details?id=com.giftech.myquran)
+
 ## Features
 
 - In-app murottal audio
