@@ -55,13 +55,6 @@ Please feel free to contact us with any questions, suggestions, or issues:
 
 - Email: [id.giftech@gmail.com](mailto:id.giftech@gmail.com)
 
-## Screenshot
-
-![MyApp Screenshot](/path/to/screenshot.png)
-
-## MAD Scorecard
-
-![MyApp MAD Scorecard](/path/to/mad_scorecard.png)
 
 ## License
 
