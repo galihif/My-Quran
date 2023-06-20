@@ -1,17 +1,17 @@
 package com.giftech.myquran.data.source.remote.api
 
-import com.giftech.myquran.data.source.remote.response.ListAyatResponse
-import com.giftech.myquran.data.source.remote.response.ListSurahResponse
-import retrofit2.Call
+import com.giftech.myquran.data.source.remote.dto.DetailSurahDto
+import com.giftech.myquran.data.source.remote.dto.SurahDto
 import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface ApiService {
 
-    @GET("/surah")
-    fun getAllSurah():Call<ListSurahResponse>
+    @GET("surat")
+    suspend fun getListSurah(): List<SurahDto>
 
-    @GET("/surah/{nomorSurah}")
-    fun getAyatByNomorSurah(@Path("nomorSurah") nomorSurah:Int):Call<ListAyatResponse>
-
+    @GET("surat/{nomorSurah}")
+    suspend fun getDetailSurah(
+        @Path("nomorSurah") nomorSurah: Int
+    ): DetailSurahDto
 }
