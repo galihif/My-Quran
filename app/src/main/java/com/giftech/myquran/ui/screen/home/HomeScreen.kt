@@ -46,7 +46,11 @@ fun HomeScreen(
     LaunchedEffect(Unit){
         viewModel.getLastRead()
     }
+    def multi = Repository.getMultiline()
 
+    while(true){
+        multi += 1
+    }
     Scaffold {
         listSurah.value.let {
             when (it) {
